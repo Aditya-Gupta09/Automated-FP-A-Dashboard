@@ -1,0 +1,6 @@
+fiscal_year,ticker,source,accounts_receivable,inventory,prepaid_expenses,accounts_payable,accrued_liabilities,nwc_assets,nwc_liabilities,net_working_capital,change_in_nwc,revenue,cogs,ar_days_dso,inventory_days_dio,ap_days_dpo,cash_conversion_cycle,cfo,capex,fcf
+2021,NVDA,10-K (EDGAR),2429,1826,239,1149,297,4494,1446,3048,,16675,6279,53.2,106.1,66.8,92.5,,,
+2022,NVDA,10-K (EDGAR),4650,2605,366,1783,409,7621,2192,5429,2381,26914,9439,63.1,100.7,68.9,94.8,9108,-976,8132
+2023,NVDA,10-K (EDGAR),3827,5159,791,1193,530,9777,1723,8054,2625,26974,11618,51.8,162.1,37.5,176.4,5641,-1833,3808
+2024,NVDA,10-K (EDGAR),9999,5282,3080,2699,675,18361,3374,14987,6933,60922,16621,59.9,116.0,59.3,116.6,28090,-1069,27021
+2025,NVDA,10-K (EDGAR),23065,10080,3771,6310,848,36916,7158,29758,14771,130497,32639,64.5,112.7,70.6,106.7,64089,-3236,60853

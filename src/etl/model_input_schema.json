@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ModelInput",
+  "description": "Input schema for NVIDIA DCF financial model. Matches the ETL canonical outputs plus final merged assumptions and scenario label.",
+  "type": "object",
+  "required": ["actuals", "costs", "working_capital", "assumptions", "scenario"],
+  "properties": {
+    "actuals": {
+      "description": "pd.DataFrame — canonical actuals table produced by ETL pipeline.",
+      "type": "object",
+      "properties": {
+        "_required_columns": {
+          "type": "array",
+          "items": {"type": "string"},
+          "const": ["fiscal_year","ticker","revenue_usdm","cogs_usdm","gross_profit_usdm","ebit_usdm","ebitda_usdm","net_income_usdm","cash_and_investments_usdm","total_assets_usdm","shareholders_equity_usdm","cfo_usdm","capex_usdm","fcf_usdm","is_forecast","scenario","source"]
+        },
+        "_dtype_fiscal_year": {"const": "int64"},
+        "_dtype_revenue_usdm": {"const": "float64"},
+        "_dtype_is_forecast": {"const": "bool"}
+      }
+    },
+    "costs": {
+      "description": "pd.DataFrame — canonical costs table. Required columns per canonical_schema.md Table 2",
+      "type": "object",
+      "properties": {
+        "_required_columns": {
+          "type": "array",
+          "items": {"type": "string"},
+          "const": ["fiscal_year","ticker","revenue_usdm","cogs_usdm","gross_profit_usdm","ebit_usdm","ebitda_usdm","net_income_usdm","is_forecast","scenario"]
+        }
+      }
+    },
+    "working_capital": {
+      "description": "pd.DataFrame — canonical working capital table. Required columns per canonical_schema.md Table 3",
+      "type": "object",
+      "properties": {
+        "_required_columns": {
+          "type": "array",
+          "items": {"type": "string"},
+          "const": ["fiscal_year","ticker","accounts_receivable_usdm","inventory_usdm","accounts_payable_usdm","net_working_capital_usdm","change_in_nwc_usdm","ar_days_dso","inventory_days_dio","ap_days_dpo","is_forecast","scenario","source"]
+        }
+      }
+    },
+    "assumptions": {
+      "description": "Final merged assumptions dict (base + scenario overrides). Output of ScenarioEngine.",
+      "type": "object",
+      "required": ["wacc","dcf","revenue_growth","gross_margin","rd_expense_pct","sga_expense_pct","tax_rate","interest_income","capex","depreciation","working_capital","debt_schedule","fcff_construction","historical_actuals_fy2025"],
+      "properties": {
+        "wacc": {
+          "type": "object",
+          "required": ["wacc","risk_free_rate","equity_risk_premium","beta_blume_adjusted"],
+          "properties": {
+            "wacc": {"type": "number", "minimum": 0, "maximum": 1},
+            "risk_free_rate": {"type": "number", "minimum": 0, "maximum": 1},
+            "equity_risk_premium": {"type": "number", "minimum": 0, "maximum": 1},
+            "beta_blume_adjusted": {"type": "number", "minimum": 0}
+          }
+        },
+        "dcf": {
+          "type": "object",
+          "required": ["terminal_growth_rate","projection_horizon_years","diluted_shares_outstanding_millions"],
+          "properties": {
+            "terminal_growth_rate": {"type": "number", "minimum": 0, "maximum": 0.10},
+            "projection_horizon_years": {"type": "integer", "minimum": 1, "maximum": 10},
+            "diluted_shares_outstanding_millions": {"type": "number", "minimum": 0}
+          }
+        }
+      }
+    },
+    "scenario": {
+      "description": "Active scenario label",
+      "type": "string",
+      "enum": ["base", "upside", "downside"]
+    }
+  }
+}

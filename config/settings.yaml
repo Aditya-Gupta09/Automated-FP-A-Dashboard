@@ -1,0 +1,111 @@
+# =============================================================================
+# NVIDIA FP&A Dashboard — Application Settings
+# config/settings.yaml
+# Source: 98_Notes sheet + 00_Assumptions metadata + data dictionary
+# Version: v1.0  |  Author: Aditya Gupta  |  Date: Oct 2025
+# =============================================================================
+
+# --- Company Identity ---
+company:
+  name: "NVIDIA Corporation"
+  ticker: "NVDA"
+  exchange: "NASDAQ"
+  sector: "Technology"
+  industry: "Semiconductors"
+  employees: 36000
+  ipo_date: "1999-01-22"
+
+# --- Fiscal Year Definition ---
+# NVIDIA fiscal year ends late January / early February
+fiscal_year:
+  end_month: 1             # January
+  end_day: 31              # ~Jan 31 (exact date varies by year)
+  label_convention: "FY{YYYY}"   # e.g. FY2025 = Feb 2024 → Jan 2025
+  first_forecast_year: 2026
+  last_forecast_year: 2030
+  forecast_horizon_years: 5
+  historical_start_year: 2020
+  historical_end_year: 2025
+  quarter_labels:          # NVIDIA fiscal quarters
+    Q1: "Feb–Apr"
+    Q2: "May–Jul"
+    Q3: "Aug–Oct"
+    Q4: "Nov–Jan"
+
+# --- Currency & Units ---
+currency:
+  unit: "USD_millions"
+  symbol: "$"
+  iso_code: "USD"
+  display_label: "$ millions"
+  per_share_unit: "USD"   # share price in full dollars
+
+# --- Number Formatting ---
+formatting:
+  rounding_precision: 2           # decimal places for $M figures
+  percentage_precision: 4         # decimal places for ratios (e.g. 0.1291)
+  percentage_display_precision: 2 # decimal places when displaying as % (e.g. 12.91%)
+  large_number_threshold: 1000    # numbers >= 1000 get comma separator
+  negative_format: "parentheses"  # e.g. (1,234) vs -1,234
+  date_format: "YYYY-MM-DD"
+  quarter_date_format: "FY{YYYY} Q{N}"
+
+# --- Model Metadata ---
+model:
+  name: "L3 DCF Financial Model"
+  method: "FCFF / Gordon Growth Terminal Value"
+  version: "v1.0"
+  valuation_date: "2025-10-17"
+  market_price_on_valuation_date: 183.22
+  build_date: "2025-10"
+  author: "Aditya Gupta"
+  data_sources:
+    - "NVIDIA 10-K FY2025 (SEC EDGAR)"
+    - "NVIDIA 10-K FY2024 (SEC EDGAR)"
+    - "NVIDIA 10-K FY2023 (SEC EDGAR)"
+    - "Yahoo Finance (market data, beta)"
+    - "Damodaran (ERP Jan 2025)"
+    - "US Treasury / FRED (risk-free rate)"
+
+# --- File Paths ---
+paths:
+  raw_data_dir: "data/raw"
+  processed_data_dir: "data/processed"
+  outputs_dir: "outputs"
+  config_dir: "config"
+  logs_dir: "logs"
+  canonical_files:
+    costs: "data/canonical/costs.csv"
+    working_capital: "data/canonical/working_capital.csv"
+    actuals: "data/canonical/actuals.csv"
+
+# --- ETL Settings ---
+etl:
+  date_index_column: "fiscal_year"
+  date_format_input: "YYYY"
+  segment_column: "segment"
+  ticker_column: "ticker"
+  encoding: "utf-8"
+  null_strategy: "forward_fill"    # for missing quarterly data
+  q4_derived_flag: "q4_derived"    # column flag for derived Q4 values
+  source_column: "source"
+
+# --- Scenario Engine ---
+scenarios:
+  active_scenario: "base"          # set to "base" | "upside" | "downside"
+  available: ["base", "upside", "downside"]
+  merge_strategy: "deep_merge"     # nested dicts require recursive merge
+
+# --- Logging ---
+logging:
+  level: "INFO"                    # DEBUG | INFO | WARNING | ERROR
+  format: "%(asctime)s — %(name)s — %(levelname)s — %(message)s"
+  log_to_file: true
+  log_filename: "logs/model_run.log"
+
+# --- Validation Tolerances ---
+validation:
+  balance_sheet_tolerance: 0.01   # max allowable BS difference ($M)
+  cashflow_tolerance: 0.01        # max CFO+CFI+CFF vs net change ($M)
+  revenue_crosscheck_tolerance: 0.01
+  fail_on_validation_error: true

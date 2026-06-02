@@ -1,0 +1,113 @@
+{
+  "_metadata": {
+    "description": "Scenario delta overrides for NVIDIA DCF model. Each scenario ONLY contains keys that differ from base assumptions. Apply via deep_merge(base_assumptions, scenario_overrides). Never use shallow dict.update() because nested keys must merge recursively.",
+    "source_sheets": "04a_Projection_IS",
+    "principle": "Scenarios never mutate base. Base remains untouched. Switching scenario changes only the overridden keys.",
+    "version": "v1.2",
+    "changelog": "v1.2 - rewrote scenario overrides so all key paths match assumptions.json exactly: wacc, dcf, and nested revenue_growth."
+  },
+
+  "base": {
+    "_comment": "Base case is intentionally empty - all values live in assumptions.json. This is the canonical reference."
+  },
+
+  "upside": {
+    "_comment": "Bull case: AI acceleration continues and discount rate/tgr shift favorably.",
+    "wacc": {
+      "wacc": 0.1191
+    },
+    "dcf": {
+      "terminal_growth_rate": 0.045
+    },
+    "revenue_growth": {
+      "data_center": {
+        "fy2026f": 0.95,
+        "fy2027f": 0.55,
+        "fy2028f": 0.35,
+        "fy2029f": 0.22,
+        "fy2030f": 0.42
+      },
+      "gaming": {
+        "fy2026f": 0.15,
+        "fy2027f": 0.10,
+        "fy2028f": 0.08,
+        "fy2029f": 0.05,
+        "fy2030f": 0.07
+      },
+      "professional_visualization": {
+        "fy2026f": 0.15,
+        "fy2027f": 0.12,
+        "fy2028f": 0.10,
+        "fy2029f": 0.10,
+        "fy2030f": 0.11
+      },
+      "automotive": {
+        "fy2026f": 0.65,
+        "fy2027f": 1.00,
+        "fy2028f": 0.50,
+        "fy2029f": 0.42,
+        "fy2030f": 0.50
+      },
+      "oem_and_other": {
+        "fy2026f": 0.10,
+        "fy2027f": 0.12,
+        "fy2028f": 0.08,
+        "fy2029f": 0.06,
+        "fy2030f": 0.07
+      }
+    }
+  },
+
+  "downside": {
+    "_comment": "Bear case: AI spending slowdown and discount rate/tgr shift unfavorably.",
+    "wacc": {
+      "wacc": 0.1391
+    },
+    "dcf": {
+      "terminal_growth_rate": 0.03
+    },
+    "revenue_growth": {
+      "data_center": {
+        "fy2026f": 0.50,
+        "fy2027f": 0.12,
+        "fy2028f": 0.04,
+        "fy2029f": -0.05,
+        "fy2030f": 0.02
+      },
+      "gaming": {
+        "fy2026f": -0.05,
+        "fy2027f": -0.05,
+        "fy2028f": -0.04,
+        "fy2029f": -0.05,
+        "fy2030f": 0.02
+      },
+      "professional_visualization": {
+        "fy2026f": -0.02,
+        "fy2027f": 0.00,
+        "fy2028f": -0.03,
+        "fy2029f": -0.02,
+        "fy2030f": 0.02
+      },
+      "automotive": {
+        "fy2026f": 0.10,
+        "fy2027f": 0.05,
+        "fy2028f": 0.05,
+        "fy2029f": 0.03,
+        "fy2030f": 0.07
+      },
+      "oem_and_other": {
+        "fy2026f": -0.05,
+        "fy2027f": -0.03,
+        "fy2028f": -0.04,
+        "fy2029f": -0.03,
+        "fy2030f": -0.05
+      }
+    }
+  },
+
+  "_usage_example": {
+    "python": "import copy\n\ndef deep_merge(base: dict, overrides: dict) -> dict:\n    result = copy.deepcopy(base)\n    for key, val in overrides.items():\n        if key.startswith('_'):\n            continue\n        if key in result and isinstance(result[key], dict) and isinstance(val, dict):\n            result[key] = deep_merge(result[key], val)\n        else:\n            result[key] = val\n    return result\n\nfinal_assumptions = deep_merge(base_assumptions, scenarios['upside'])",
+    "note": "MUST use deep_merge (recursive) - NOT shallow dict.update(). Shallow update replaces entire sub-dicts instead of merging individual nested keys.",
+    "wacc_override_pattern": "WACC is overridden at wacc.wacc. After deep_merge, final_assumptions['wacc']['wacc'] == 0.1191 for upside."
+  }
+}

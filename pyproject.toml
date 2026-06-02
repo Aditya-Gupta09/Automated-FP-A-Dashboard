@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "nvidia-fpa-platform"
+version = "3.0.0"
+description = "Institutional-grade FP&A and DCF valuation platform for NVIDIA"
+authors = [{ name = "Aditya Gupta", email = "aditya@example.com" }]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+keywords = ["finance", "fpa", "dcf", "valuation", "nvidia", "financial-modeling"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Financial and Insurance Industry",
+    "Topic :: Office/Business :: Financial",
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: MIT License",
+]
+
+[project.urls]
+Homepage    = "https://github.com/Aditya-Gupta09/Automated-FP-A-Dashboard"
+Repository  = "https://github.com/Aditya-Gupta09/Automated-FP-A-Dashboard"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+# ─── pytest ───────────────────────────────────────────────────────────────────
+[tool.pytest.ini_options]
+testpaths    = ["tests"]
+pythonpath   = ["src"]
+addopts      = "-v --tb=short --strict-markers"
+markers = [
+    "invariants: financial invariant checks (BS balance, CF recon, RE roll)",
+    "golden: regression tests against known 10-K values",
+    "etl: ETL pipeline tests",
+    "modeling: financial model unit tests",
+    "integration: full pipeline integration tests",
+]
+
+# ─── coverage ────────────────────────────────────────────────────────────────
+[tool.coverage.run]
+source   = ["src"]
+omit     = ["src/utils/formatting.py", "tests/*"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under   = 70
+
+# ─── ruff (linter) ───────────────────────────────────────────────────────────
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+select = ["E", "F", "W", "I", "N", "UP"]
+ignore = ["E501"]
+
+# ─── mypy (type checking) ─────────────────────────────────────────────────────
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+warn_return_any = true

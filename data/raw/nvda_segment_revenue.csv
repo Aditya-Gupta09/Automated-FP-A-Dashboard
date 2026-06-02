@@ -1,0 +1,26 @@
+fiscal_quarter,fiscal_year,quarter_num,period_end,data_center_usdm,gaming_usdm,professional_viz_usdm,automotive_usdm,oem_and_other_usdm,total_revenue_usdm,data_center_pct,gaming_pct,professional_viz_pct,automotive_pct,oem_and_other_pct,source_filing,q4_derived,segment_notes
+FY2019 Annual,2019,Annual,2019-01-27,2932,5518,1130,641,776,10997,0.2666,0.5018,0.1028,0.0583,0.0706,10K,N,10-K annual only; quarterly not disaggregated
+FY2020 Q1,2020,1,2019-04-28,634,1050,276,166,94,2220,0.2856,0.473,0.1243,0.0748,0.0423,10Q,N,FY2020: Mellanox acquisition closed Apr 2020 (Q1 FY2021); Data Center excludes Mellanox in Q1-Q3
+FY2020 Q2,2020,2,2019-07-28,655,1190,287,150,297,2579,0.254,0.4614,0.1113,0.0582,0.1152,10Q,N,FY2020: Mellanox acquisition closed Apr 2020 (Q1 FY2021); Data Center excludes Mellanox in Q1-Q3
+FY2020 Q3,2020,3,2019-10-27,726,1659,325,161,143,3014,0.2409,0.5504,0.1078,0.0534,0.0474,10Q,N,FY2020: Mellanox acquisition closed Apr 2020 (Q1 FY2021); Data Center excludes Mellanox in Q1-Q3
+FY2020 Q4,2020,4,2020-01-26,789,1491,322,163,340,3105,0.2541,0.4802,0.1037,0.0525,0.1095,10Q/derived,Y,FY2020: Mellanox acquisition closed Apr 2020 (Q1 FY2021); Data Center excludes Mellanox in Q1-Q3
+FY2021 Q1,2021,1,2020-04-26,1141,1339,307,155,138,3080,0.3705,0.4347,0.0997,0.0503,0.0448,10Q,N,FY2021: Mellanox fully integrated into Data Center from Q1; segment restated
+FY2021 Q2,2021,2,2020-07-26,1752,1654,372,111,377,4266,0.4107,0.3877,0.0872,0.026,0.0884,10Q,N,FY2021: Mellanox fully integrated into Data Center from Q1; segment restated
+FY2021 Q3,2021,3,2020-10-25,2934,2271,577,147,197,6126,0.4789,0.3707,0.0942,0.024,0.0322,10Q,N,FY2021: Mellanox fully integrated into Data Center from Q1; segment restated
+FY2021 Q4,2021,4,2021-01-31,1152,1510,349,88,104,3203,0.3597,0.4714,0.1090,0.0275,0.0325,10K/corrected,Y,FY2021: Mellanox fully integrated into Data Center from Q1; segment restated | Q4 total corrected via proportional scaling to IS annual; segment mix preserved from original Q4 derivation.
+FY2022 Q1,2022,1,2021-05-02,2048,2760,622,154,77,5661,0.3618,0.4875,0.1099,0.0272,0.0136,10Q,N,FY2022: CMP (crypto mining) revenue reported in OEM; Mellanox in Data Center
+FY2022 Q2,2022,2,2021-08-01,3806,3061,622,152,266,7907,0.4813,0.3871,0.0787,0.0192,0.0336,10Q,N,FY2022: CMP (crypto mining) revenue reported in OEM; Mellanox in Data Center
+FY2022 Q3,2022,3,2021-10-31,2936,3221,577,135,234,7103,0.4133,0.4535,0.0812,0.019,0.0329,10Q,N,FY2022: CMP (crypto mining) revenue reported in OEM; Mellanox in Data Center
+FY2022 Q4,2022,4,2022-01-30,2665,2794,525,106,153,6243,0.4269,0.4475,0.0841,0.0170,0.0245,10K/corrected,Y,FY2022: CMP (crypto mining) revenue reported in OEM; Mellanox in Data Center | Q4 total corrected via proportional scaling to IS annual; segment mix preserved from original Q4 derivation.
+FY2023 Q1,2023,1,2022-05-01,3750,3620,622,138,160,8290,0.4524,0.4367,0.075,0.0166,0.0193,10Q,N,FY2023: Gaming declined sharply due to channel inventory correction post-crypto bust
+FY2023 Q2,2023,2,2022-07-31,3806,2042,496,220,140,6704,0.5677,0.3046,0.074,0.0328,0.0209,10Q,N,FY2023: Gaming declined sharply due to channel inventory correction post-crypto bust
+FY2023 Q3,2023,3,2022-10-30,3833,1574,200,251,73,5931,0.6463,0.2654,0.0337,0.0423,0.0123,10Q,N,FY2023: Gaming declined sharply due to channel inventory correction post-crypto bust
+FY2023 Q4,2023,4,2023-01-29,3616,1294,226,294,621,6051,0.5976,0.2138,0.0373,0.0486,0.1026,10Q/derived,Y,FY2023: Gaming declined sharply due to channel inventory correction post-crypto bust
+FY2024 Q1,2024,1,2023-04-30,4284,2240,295,296,77,7192,0.5957,0.3115,0.041,0.0412,0.0107,10Q,N,FY2024: AI/HPC demand drove Data Center to 74%+ of mix by Q4; H100 GPU ramp
+FY2024 Q2,2024,2,2023-07-30,10323,2486,379,253,66,13507,0.7643,0.1841,0.0281,0.0187,0.0049,10Q,N,FY2024: AI/HPC demand drove Data Center to 74%+ of mix by Q4; H100 GPU ramp
+FY2024 Q3,2024,3,2023-10-29,14514,2857,416,261,73,18121,0.8009,0.1577,0.023,0.0144,0.004,10Q,N,FY2024: AI/HPC demand drove Data Center to 74%+ of mix by Q4; H100 GPU ramp
+FY2024 Q4,2024,4,2024-01-28,18404,2866,463,281,89,22103,0.8326,0.1297,0.0209,0.0127,0.004,10Q/derived,Y,FY2024: AI/HPC demand drove Data Center to 74%+ of mix by Q4; H100 GPU ramp
+FY2025 Q1,2025,1,2024-04-28,22563,2647,427,329,78,26044,0.8663,0.1016,0.0164,0.0126,0.003,10Q,N,FY2025: Data Center >87% of revenue by Q4; Blackwell architecture launch
+FY2025 Q2,2025,2,2024-07-28,26300,2880,454,346,60,30040,0.8755,0.0959,0.0151,0.0115,0.002,10Q,N,FY2025: Data Center >87% of revenue by Q4; Blackwell architecture launch
+FY2025 Q3,2025,3,2024-10-27,30770,3279,487,449,97,35082,0.8771,0.0935,0.0139,0.0128,0.0028,10Q,N,FY2025: Data Center >87% of revenue by Q4; Blackwell architecture launch
+FY2025 Q4,2025,4,2025-01-26,34690,3445,498,556,142,39331,0.8820,0.0876,0.0127,0.0141,0.0036,10K/corrected,Y,FY2025: Data Center >87% of revenue by Q4; Blackwell architecture launch | Q4 total corrected via proportional scaling to IS annual; segment mix preserved from original Q4 derivation.

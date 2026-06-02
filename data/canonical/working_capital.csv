@@ -1,0 +1,6 @@
+fiscal_year,accounts_receivable_usdm,inventory_usdm,accounts_payable_usdm,prepaid_expenses_usdm,accrued_liabilities_usdm,revenue_usdm,cogs_usdm,nwc_assets_usdm,nwc_liabilities_usdm,net_working_capital_usdm,change_in_nwc_usdm,ar_days_dso,inventory_days_dio,ap_days_dpo,cash_conversion_cycle,ticker,is_forecast,scenario,source
+2021,2429,1826,1149,239,297,16675,6279,4494,1446,3048,,53.2,106.1,66.8,92.50000000000001,NVDA,False,base,10-K (EDGAR)
+2022,4650,2605,1783,366,409,26914,9439,7621,2192,5429,2381.0,63.1,100.7,68.9,94.9,NVDA,False,base,10-K (EDGAR)
+2023,3827,5159,1193,791,530,26974,11618,9777,1723,8054,2625.0,51.8,162.1,37.5,176.39999999999998,NVDA,False,base,10-K (EDGAR)
+2024,9999,5282,2699,3080,675,60922,16621,18361,3374,14987,6933.0,59.9,116.0,59.3,116.60000000000001,NVDA,False,base,10-K (EDGAR)
+2025,23065,10080,6310,3771,848,130497,32639,36916,7158,29758,14771.0,64.5,112.7,70.6,106.6,NVDA,False,base,10-K (EDGAR)

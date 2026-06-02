@@ -1,0 +1,95 @@
+{
+  // NVIDIA FP&A Dashboard — Dev Container
+  // Based on ekkaritg/nvidia-fpa-dashboard devcontainer pattern.
+  // Updated: Python 3.11, full project dependency set, Streamlit port forwarded.
+  // Author: Aditya Gupta | Version: v1.0
+
+  "name": "NVIDIA FP&A Dashboard",
+
+  // Use the official Microsoft Python 3.11 devcontainer base image.
+  // ekkaritg used Python 3.10 — bumped to 3.11 for match-statement support
+  // and improved performance with pandas 2.x + pyarrow.
+  "image": "mcr.microsoft.com/devcontainers/python:3.11-bullseye",
+
+  // ── Port forwarding ──────────────────────────────────────────────────────
+  // Streamlit default port. Auto-opens in browser on container start.
+  "forwardPorts": [8501],
+  "portsAttributes": {
+    "8501": {
+      "label": "Streamlit App",
+      "onAutoForward": "openBrowser"
+    }
+  },
+
+  // ── Post-create: install all dependencies ────────────────────────────────
+  "postCreateCommand": "pip install --upgrade pip && pip install -r requirements.txt",
+
+  // ── VS Code extensions ───────────────────────────────────────────────────
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // Python core
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.debugpy",
+
+        // Linting + formatting (ruff replaces flake8 + isort + pyupgrade)
+        "charliermarsh.ruff",
+
+        // Notebook support (for exploratory analysis)
+        "ms-toolsai.jupyter",
+
+        // Data file viewers
+        "mechatroner.rainbow-csv",
+        "GrapeCity.gc-excelviewer",
+
+        // JSON / YAML support (for config files)
+        "redhat.vscode-yaml",
+        "ZainChen.one-json",
+
+        // Git
+        "eamodio.gitlens",
+
+        // Markdown preview (for README, methodology docs)
+        "yzhang.markdown-all-in-one"
+      ],
+      "settings": {
+        // Python interpreter
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+
+        // Use ruff for all formatting + linting (replaces black + flake8)
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "[python]": {
+          "editor.defaultFormatter": "charliermarsh.ruff",
+          "editor.formatOnSave": true,
+          "editor.codeActionsOnSave": {
+            "source.fixAll.ruff": "explicit",
+            "source.organizeImports.ruff": "explicit"
+          }
+        },
+
+        // Streamlit: treat as plain Python (not a notebook)
+        "python.analysis.typeCheckingMode": "basic",
+
+        // Terminal defaults
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "files.trimTrailingWhitespace": true,
+        "files.insertFinalNewline": true
+      }
+    }
+  },
+
+  // ── Environment variables ────────────────────────────────────────────────
+  "remoteEnv": {
+    // Ensures Python can find src/ and app/ as packages from repo root
+    "PYTHONPATH": "${containerWorkspaceFolder}",
+    // Streamlit config: disable telemetry in dev
+    "STREAMLIT_BROWSER_GATHER_USAGE_STATS": "false",
+    // Suppress Streamlit email prompt on first run
+    "STREAMLIT_SERVER_HEADLESS": "true"
+  },
+
+  // ── Run as non-root for security ─────────────────────────────────────────
+  "remoteUser": "vscode"
+}

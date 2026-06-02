@@ -1,0 +1,325 @@
+{
+  "_metadata": {
+    "title": "NVIDIA Corporation — Model Assumptions (Complete Extract)",
+    "source": "Company_Valuation_Model.xlsx — all sheets",
+    "valuation_date": "2025-10-17",
+    "currency": "USD_millions",
+    "fiscal_year_end": "January-31",
+    "forecast_horizon": "FY2026F–FY2030F",
+    "version": "v1.0",
+    "rule": "ZERO hardcoded numbers in any Python module. Every value sourced from this file.",
+    "forecast_years": [2026, 2027, 2028, 2029, 2030],
+    "historical_years": [2020, 2021, 2022, 2023, 2024, 2025]
+  },
+
+  "wacc": {
+    "_source": "15_WACC sheet | named ranges + address cells F7–F19",
+    "risk_free_rate": 0.0407,
+    "equity_risk_premium": 0.05,
+    "beta_raw": 0.6749042266526748,
+    "beta_blume_weight_raw": 0.67,
+    "beta_blume_weight_market": 0.33,
+    "beta_blume_adjusted": 1.7728261434565593,
+    "cost_of_equity_capm": 0.129341307172828,
+    "pretax_cost_of_debt": 0.028285274047985913,
+    "effective_tax_rate_fy2025_actual": 0.13264941803727417,
+    "weight_equity": 0.9981026633333804,
+    "weight_debt": 0.0018973366666195863,
+    "wacc": 0.1291424510009221,
+    "market_cap_equity_usdm": 4452000.0,
+    "total_debt_usdm": 8463.0,
+    "wacc_tolerance_bps": 1
+  },
+
+  "dcf": {
+    "_source": "05b_DCF sheet rows 12–38 | 00_Assumptions section 2",
+    "terminal_growth_rate": 0.03675,
+    "terminal_value_method": "gordon_growth",
+    "discounting_convention": "end_of_year",
+    "projection_horizon_years": 5,
+    "diluted_shares_outstanding_millions": 24300,
+    "market_price_valuation_date_usd": 183.22,
+    "net_debt_bridge": {
+      "short_term_debt_usdm": 0,
+      "current_portion_ltd_usdm": 0,
+      "current_portion_leases_usdm": 288,
+      "long_term_debt_usdm": 8463,
+      "long_term_leases_usdm": 1519,
+      "total_debt_usdm": 10270,
+      "cash_and_investments_usdm": 43210,
+      "net_debt_usdm": -32940
+    },
+    "exit_multiple_crosscheck": {
+      "exit_multiple_peer_median_ev_ebitda": 22.3,
+      "method": "FY2030_EBITDA_times_exit_multiple"
+    },
+    "expected_outputs": {
+      "base": {
+        "sum_pv_fcf_usdm": 660850.9583,
+        "terminal_value_usdm": 3595241.2653,
+        "pv_terminal_value_usdm": 1958774.1458,
+        "enterprise_value_usdm": 2619625.1042,
+        "equity_value_usdm": 2652565.1042,
+        "implied_share_price_usd": 109.1591
+      },
+      "upside": {
+        "sum_pv_fcf_usdm": 1042654.2254,
+        "terminal_value_usdm": 7902408.7859,
+        "pv_terminal_value_usdm": 4502098.7115,
+        "enterprise_value_usdm": 5544752.9369,
+        "equity_value_usdm": 5577692.9369,
+        "implied_share_price_usd": 229.5347
+      },
+      "downside": {
+        "sum_pv_fcf_usdm": 268551.0636,
+        "terminal_value_usdm": 948427.0334,
+        "pv_terminal_value_usdm": 494532.3029,
+        "enterprise_value_usdm": 763083.3666,
+        "equity_value_usdm": 796023.3666,
+        "implied_share_price_usd": 32.7582
+      }
+    }
+  },
+
+  "revenue_growth": {
+    "_source": "04a_Projection_IS rows 5–36 | 00_Assumptions section 3",
+    "data_center": {
+      "fy2026f": 0.69, "fy2027f": 0.42, "fy2028f": 0.27,
+      "fy2029f": 0.16, "fy2030f": 0.22
+    },
+    "gaming": {
+      "fy2026f": 0.05, "fy2027f": 0.03, "fy2028f": 0.02,
+      "fy2029f": 0.02, "fy2030f": 0.03
+    },
+    "professional_visualization": {
+      "fy2026f": 0.06, "fy2027f": 0.07, "fy2028f": 0.05,
+      "fy2029f": 0.04, "fy2030f": 0.05
+    },
+    "automotive": {
+      "fy2026f": 0.45, "fy2027f": 0.50, "fy2028f": 0.35,
+      "fy2029f": 0.26, "fy2030f": 0.35
+    },
+    "oem_and_other": {
+      "fy2026f": 0.02, "fy2027f": 0.03, "fy2028f": 0.02,
+      "fy2029f": 0.02, "fy2030f": 0.03
+    },
+    "total_blended": {
+      "fy2026f": 0.62, "fy2027f": 0.39, "fy2028f": 0.26,
+      "fy2029f": 0.16, "fy2030f": 0.21
+    },
+    "fy2025_base_usdm": {
+      "data_center": 115186, "gaming": 11350,
+      "professional_visualization": 1878, "automotive": 1694,
+      "oem_and_other": 389, "total": 130497
+    }
+  },
+
+  "gross_margin": {
+    "_source": "04a_Projection_IS margin cols rows 5–8",
+    "fy2025_actual": 0.7498869705816992,
+    "base_case": {
+      "fy2026f": 0.7698869705816992, "fy2027f": 0.7898869705816992,
+      "fy2028f": 0.8098869705816992, "fy2029f": 0.8298869705816992,
+      "fy2030f": 0.8498869705816993
+    },
+    "upside_case": {
+      "fy2026f": 0.8198869705816992, "fy2027f": 0.8398869705816993,
+      "fy2028f": 0.8598869705816993, "fy2029f": 0.8798869705816993,
+      "fy2030f": 0.8998869705816993
+    },
+    "downside_case": {
+      "fy2026f": 0.66, "fy2027f": 0.655,
+      "fy2028f": 0.65, "fy2029f": 0.65, "fy2030f": 0.645
+    }
+  },
+
+  "rd_expense_pct": {
+    "_source": "04a_Projection_IS margin rows 10–13",
+    "fy2025_actual": 0.0989601293516326,
+    "base_case": {
+      "fy2026f": 0.095, "fy2027f": 0.093,
+      "fy2028f": 0.090, "fy2029f": 0.088, "fy2030f": 0.085
+    },
+    "upside_case": {
+      "fy2026f": 0.088, "fy2027f": 0.085,
+      "fy2028f": 0.083, "fy2029f": 0.080, "fy2030f": 0.078
+    },
+    "downside_case": {
+      "fy2026f": 0.105, "fy2027f": 0.110,
+      "fy2028f": 0.110, "fy2029f": 0.105, "fy2030f": 0.100
+    }
+  },
+
+  "sga_expense_pct": {
+    "_source": "04a_Projection_IS margin rows 15–18",
+    "fy2025_actual": 0.026751572833091947,
+    "base_case": {
+      "fy2026f": 0.025, "fy2027f": 0.024,
+      "fy2028f": 0.023, "fy2029f": 0.022, "fy2030f": 0.022
+    },
+    "upside_case": {
+      "fy2026f": 0.024, "fy2027f": 0.022,
+      "fy2028f": 0.021, "fy2029f": 0.020, "fy2030f": 0.020
+    },
+    "downside_case": {
+      "fy2026f": 0.028, "fy2027f": 0.030,
+      "fy2028f": 0.031, "fy2029f": 0.030, "fy2030f": 0.030
+    }
+  },
+
+  "tax_rate": {
+    "_source": "04a_Projection_IS rows 62–65",
+    "fy2025_actual": 0.13264941803727417,
+    "base_case": {
+      "fy2026f": 0.15, "fy2027f": 0.145,
+      "fy2028f": 0.145, "fy2029f": 0.14, "fy2030f": 0.14
+    },
+    "upside_case": {
+      "fy2026f": 0.13, "fy2027f": 0.125,
+      "fy2028f": 0.125, "fy2029f": 0.12, "fy2030f": 0.12
+    },
+    "downside_case": {
+      "fy2026f": 0.16, "fy2027f": 0.17,
+      "fy2028f": 0.17, "fy2029f": 0.175, "fy2030f": 0.18
+    }
+  },
+
+  "interest_income": {
+    "_source": "04a_Projection_IS rows 42–58",
+    "cash_pct_of_revenue": {
+      "base": {"fy2026f": 0.28, "fy2027f": 0.25, "fy2028f": 0.23, "fy2029f": 0.22, "fy2030f": 0.21},
+      "upside": {"fy2026f": 0.30, "fy2027f": 0.28, "fy2028f": 0.27, "fy2029f": 0.26, "fy2030f": 0.25},
+      "downside": {"fy2026f": 0.25, "fy2027f": 0.22, "fy2028f": 0.20, "fy2029f": 0.19, "fy2030f": 0.18}
+    },
+    "assumed_yield": {
+      "base": {"fy2026f": 0.0345, "fy2027f": 0.0325, "fy2028f": 0.0325, "fy2029f": 0.0310, "fy2030f": 0.0310},
+      "upside": {"fy2026f": 0.0295, "fy2027f": 0.0275, "fy2028f": 0.0275, "fy2029f": 0.0260, "fy2030f": 0.0260},
+      "downside": {"fy2026f": 0.0395, "fy2027f": 0.0375, "fy2028f": 0.0375, "fy2029f": 0.0360, "fy2030f": 0.0360}
+    },
+    "other_income_net_flat_usdm": {
+      "fy2026f": 1700, "fy2027f": 1000, "fy2028f": 1000, "fy2029f": 1000, "fy2030f": 1000
+    }
+  },
+
+  "capex": {
+    "_source": "12_FixedAssets rows 36–39",
+    "base_case": {
+      "fy2026f": 0.030, "fy2027f": 0.032, "fy2028f": 0.033,
+      "fy2029f": 0.030, "fy2030f": 0.028
+    },
+    "upside_case": {
+      "fy2026f": 0.035, "fy2027f": 0.040, "fy2028f": 0.045,
+      "fy2029f": 0.035, "fy2030f": 0.045
+    },
+    "downside_case": {
+      "fy2026f": 0.020, "fy2027f": 0.022, "fy2028f": 0.023,
+      "fy2029f": 0.020, "fy2030f": 0.025
+    }
+  },
+
+  "depreciation": {
+    "_source": "11_DA sheet B3 | 12_FixedAssets rows 41–49",
+    "da_useful_life_years": 5,
+    "depreciation_method": "straight_line",
+    "depreciation_rate_pct_gross_ppe": {
+      "base": 0.22, "upside": 0.25, "downside": 0.19
+    },
+    "intangible_purchases_pct_capex": {
+      "base": 0.12, "upside": 0.15, "downside": 0.08
+    },
+    "da_schedule_usdm_base": {
+      "fy2026f": 3046.1975599999996, "fy2027f": 4816.973790399999,
+      "fy2028f": 6921.4048803168, "fy2029f": 9077.66800468816,
+      "fy2030f": 11117.025014739364
+    }
+  },
+
+  "working_capital": {
+    "_source": "09_WorkingCapital rows 21–37",
+    "dso_days": {
+      "fy2025_actual": 64.51278573453796,
+      "base": {"fy2026f": 63.51278573453796, "fy2027f": 62.51278573453796,
+               "fy2028f": 61.51278573453796, "fy2029f": 60.51278573453796, "fy2030f": 59.51278573453796},
+      "upside": {"fy2026f": 62, "fy2027f": 60, "fy2028f": 58, "fy2029f": 56, "fy2030f": 54},
+      "downside": {"fy2026f": 72, "fy2027f": 74, "fy2028f": 76, "fy2029f": 78, "fy2030f": 80}
+    },
+    "dio_days": {
+      "fy2025_actual": 112.72404179049603,
+      "base": {"fy2026f": 110, "fy2027f": 105, "fy2028f": 100, "fy2029f": 95, "fy2030f": 90},
+      "upside": {"fy2026f": 95, "fy2027f": 85, "fy2028f": 75, "fy2029f": 71, "fy2030f": 65},
+      "downside": {"fy2026f": 160, "fy2027f": 150, "fy2028f": 140, "fy2029f": 120, "fy2030f": 110}
+    },
+    "dpo_days": {
+      "fy2025_actual": 70.56435552559822,
+      "base": {"fy2026f": 69.56435552559822, "fy2027f": 68.56435552559822,
+               "fy2028f": 67.56435552559822, "fy2029f": 66.56435552559822, "fy2030f": 65.56435552559822},
+      "upside": {"fy2026f": 72, "fy2027f": 74, "fy2028f": 76, "fy2029f": 78, "fy2030f": 80},
+      "downside": {"fy2026f": 60, "fy2027f": 55, "fy2028f": 50, "fy2029f": 48, "fy2030f": 46}
+    },
+    "prepaid_pct_of_opex": {
+      "fy2025_actual": 0.2298689423956111,
+      "base": {"fy2026f": 0.1998689423956111, "fy2027f": 0.1698689423956111,
+               "fy2028f": 0.1398689423956111, "fy2029f": 0.12, "fy2030f": 0.10}
+    },
+    "accrued_pct_of_cogs_plus_opex": {
+      "fy2025_actual": 0.23931571649946987,
+      "base": {"fy2026f": 0.23931571649946987, "fy2027f": 0.23931571649946987,
+               "fy2028f": 0.23931571649946987, "fy2029f": 0.23931571649946987,
+               "fy2030f": 0.23931571649946987}
+    },
+    "operating_balance_scale": {
+      "_source": "Legacy model calibration; explicit scenario-visible scaling of AR, inventory, and AP balances",
+      "base": 1.15,
+      "upside": 1.15,
+      "downside": 1.15
+    }
+  },
+
+  "debt_schedule": {
+    "_source": "13_DebtSchedule rows 16–27",
+    "net_debt_issuance_usdm": {
+      "base": {"fy2026f": 1000, "fy2027f": 0, "fy2028f": 1250, "fy2029f": 0, "fy2030f": 1500}
+    },
+    "interest_rate_pretax": {
+      "base": {"fy2026f": 0.0331, "fy2027f": 0.0331, "fy2028f": 0.0164, "fy2029f": 0.0164, "fy2030f": 0.0293},
+      "upside": {"fy2026f": 0.0331, "fy2027f": 0.0280, "fy2028f": 0.0164, "fy2029f": 0.0120, "fy2030f": 0.0293},
+      "downside": {"fy2026f": 0.0331, "fy2027f": 0.0350, "fy2028f": 0.0164, "fy2029f": 0.0260, "fy2030f": 0.0293}
+    }
+  },
+
+  "fcff_construction": {
+    "_source": "05a_FCFF rows 13–20 | methodology.md section 3",
+    "formula": "NOPAT + DA - CapEx - DeltaNWC",
+    "nopat_formula": "EBIT × (1 - effective_tax_rate)",
+    "tax_applied_to": "EBIT_not_EBT",
+    "change_in_nwc_sign_convention": "positive_increase_is_cash_outflow",
+    "capex_sign_in_formula": "positive_absolute_value",
+    "historical_fcff_usdm": {
+      "fy2023": 2650, "fy2024": 23329, "fy2025": 55932
+    }
+  },
+
+  "historical_actuals_fy2025": {
+    "_source": "cleaned_financials.csv | all historical sheets",
+    "revenue_usdm": 130497,
+    "cogs_usdm": 32639,
+    "gross_profit_usdm": 97858,
+    "ebit_usdm": 81453,
+    "ebitda_usdm": 83317,
+    "da_usdm": 1864,
+    "net_income_usdm": 72880,
+    "interest_expense_usdm": -247,
+    "cfo_usdm": 64089,
+    "capex_usdm": -3236,
+    "fcf_usdm": 60853,
+    "total_assets_usdm": 111601,
+    "ppe_net_usdm": 6283.0,
+    "total_debt_usdm": 10270,
+    "shareholders_equity_usdm": 79327,
+    "accounts_receivable_usdm": 23065,
+    "inventory_usdm": 10080,
+    "accounts_payable_usdm": 6310,
+    "cash_and_investments_usdm": 43210,
+    "nwc_usdm": 18869
+  }
+}

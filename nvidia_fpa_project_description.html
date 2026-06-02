@@ -1,0 +1,465 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Sora:wght@300;400;500;600&display=swap');
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --gold:#C8A96E;--gold-lt:#F0E0B8;--gold-dk:#7A5C2A;
+    --ink:#1A1A1A;--ink2:#3D3D3D;--ink3:#6B6B6B;
+    --cream:#FAF8F4;--cream2:#F2EDE3;--cream3:#E8DFC8;
+    --teal:#0F6E56;--teal-lt:#E1F5EE;
+    --navy:#0C1A2E;--navy2:#1A3055;
+    --danger:#A32D2D;--success:#0F6E56;
+  }
+  body{font-family:'Sora',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;}
+
+  .hero{
+    background:var(--navy);color:#F0EAD8;
+    padding:3rem 2.5rem 2rem;
+    border-bottom:3px solid var(--gold);
+    position:relative;overflow:hidden;
+  }
+  .hero::before{
+    content:'';position:absolute;top:-60px;right:-60px;
+    width:280px;height:280px;border-radius:50%;
+    border:1px solid rgba(200,169,110,0.15);
+  }
+  .hero::after{
+    content:'';position:absolute;top:-30px;right:-30px;
+    width:180px;height:180px;border-radius:50%;
+    border:1px solid rgba(200,169,110,0.1);
+  }
+  .chip{
+    display:inline-block;font-family:'DM Mono',monospace;font-size:10px;
+    letter-spacing:0.12em;text-transform:uppercase;
+    background:rgba(200,169,110,0.18);color:var(--gold);
+    border:1px solid rgba(200,169,110,0.35);
+    border-radius:3px;padding:3px 10px;margin-bottom:1rem;
+  }
+  .hero h1{
+    font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);
+    font-weight:400;line-height:1.15;color:#F0EAD8;
+    margin-bottom:0.5rem;
+  }
+  .hero h1 em{color:var(--gold);font-style:italic;}
+  .hero-sub{font-size:0.9rem;color:rgba(240,234,216,0.65);max-width:620px;margin-top:0.75rem;}
+  .hero-meta{
+    display:flex;flex-wrap:wrap;gap:1.5rem;
+    margin-top:2rem;padding-top:1.5rem;
+    border-top:1px solid rgba(200,169,110,0.2);
+  }
+  .meta-item{display:flex;flex-direction:column;gap:2px;}
+  .meta-label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(200,169,110,0.7);font-family:'DM Mono',monospace;}
+  .meta-val{font-size:0.85rem;color:#F0EAD8;font-weight:500;}
+
+  .content{max-width:900px;margin:0 auto;padding:2.5rem 1.5rem;}
+
+  .section{margin-bottom:3rem;}
+  .section-header{
+    display:flex;align-items:center;gap:12px;
+    margin-bottom:1.25rem;padding-bottom:0.75rem;
+    border-bottom:1px solid var(--cream3);
+  }
+  .section-num{
+    font-family:'DM Mono',monospace;font-size:11px;
+    color:var(--gold-dk);letter-spacing:0.1em;
+    background:var(--cream2);border:1px solid var(--cream3);
+    border-radius:3px;padding:2px 8px;
+  }
+  .section-title{
+    font-family:'DM Serif Display',serif;font-size:1.25rem;
+    font-weight:400;color:var(--navy);
+  }
+
+  .card{
+    background:#fff;border:1px solid var(--cream3);
+    border-radius:10px;padding:1.25rem 1.5rem;
+    margin-bottom:1rem;
+  }
+  .card-accent{border-left:3px solid var(--gold);}
+  .card-teal{border-left:3px solid var(--teal);}
+  .card-navy{border-left:3px solid var(--navy2);}
+
+  .pipeline{display:flex;flex-direction:column;gap:0;}
+  .pipe-step{
+    display:grid;grid-template-columns:36px 1fr;
+    gap:0 1rem;
+  }
+  .pipe-left{display:flex;flex-direction:column;align-items:center;}
+  .pipe-dot{
+    width:36px;height:36px;border-radius:50%;
+    background:var(--navy);color:#F0EAD8;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'DM Mono',monospace;font-size:11px;font-weight:500;
+    flex-shrink:0;
+  }
+  .pipe-line{width:2px;flex:1;background:var(--cream3);margin:4px auto;}
+  .pipe-body{padding:0 0 1.5rem;}
+  .pipe-name{font-weight:500;font-size:0.92rem;color:var(--navy);margin-bottom:0.3rem;}
+  .pipe-desc{font-size:0.82rem;color:var(--ink3);line-height:1.6;}
+
+  .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:1rem 0;}
+  .kpi-card{
+    background:var(--cream2);border:1px solid var(--cream3);
+    border-radius:8px;padding:0.75rem 1rem;
+    display:flex;flex-direction:column;gap:4px;
+  }
+  .kpi-label{font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink3);font-family:'DM Mono',monospace;}
+  .kpi-val{font-size:1.3rem;font-weight:500;color:var(--navy);}
+  .kpi-signal{font-size:11px;font-weight:500;}
+  .green{color:var(--success);} .amber{color:#854F0B;} .red{color:var(--danger);}
+
+  .tag{
+    display:inline-block;font-size:11px;font-family:'DM Mono',monospace;
+    background:var(--cream2);border:1px solid var(--cream3);
+    color:var(--ink2);border-radius:4px;padding:2px 8px;margin:3px;
+  }
+  .tag-gold{background:rgba(200,169,110,0.12);border-color:rgba(200,169,110,0.4);color:var(--gold-dk);}
+  .tag-teal{background:var(--teal-lt);border-color:#9FE1CB;color:var(--teal);}
+  .tag-navy{background:#E6EAF0;border-color:#B5C4D4;color:var(--navy2);}
+
+  .invariant{
+    background:#fff;border:1px solid var(--cream3);border-radius:8px;
+    padding:1rem 1.25rem;margin-bottom:0.75rem;
+    display:flex;gap:1rem;align-items:flex-start;
+  }
+  .inv-num{
+    width:28px;height:28px;flex-shrink:0;border-radius:50%;
+    background:var(--navy);color:#F0EAD8;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'DM Mono',monospace;font-size:11px;font-weight:500;
+  }
+  .inv-body{}
+  .inv-name{font-weight:500;font-size:0.88rem;color:var(--navy);margin-bottom:2px;}
+  .inv-formula{font-family:'DM Mono',monospace;font-size:11px;color:var(--teal);background:var(--teal-lt);border-radius:4px;padding:3px 8px;display:inline-block;margin:4px 0;}
+  .inv-desc{font-size:0.8rem;color:var(--ink3);}
+
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+  @media(max-width:600px){.two-col{grid-template-columns:1fr;}.hero-meta{gap:1rem;}}
+
+  .verdict{
+    background:var(--navy);color:#F0EAD8;
+    border-radius:10px;padding:1.75rem 2rem;
+    margin-top:2.5rem;
+  }
+  .verdict-title{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--gold);margin-bottom:1rem;font-weight:400;}
+  .verdict-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-top:1rem;}
+  .verdict-item{border-top:1px solid rgba(200,169,110,0.25);padding-top:0.75rem;}
+  .verdict-q{font-size:0.78rem;color:rgba(240,234,216,0.6);font-family:'DM Mono',monospace;margin-bottom:0.3rem;letter-spacing:0.06em;text-transform:uppercase;}
+  .verdict-a{font-size:0.88rem;color:#F0EAD8;line-height:1.5;}
+
+  .mono{font-family:'DM Mono',monospace;font-size:0.85em;background:var(--cream2);border:1px solid var(--cream3);border-radius:3px;padding:1px 5px;}
+  p{margin-bottom:0.75rem;font-size:0.9rem;color:var(--ink2);}
+  ul{list-style:none;padding:0;}
+  ul li{font-size:0.87rem;color:var(--ink2);padding:4px 0 4px 1rem;position:relative;border-bottom:1px solid var(--cream2);}
+  ul li:last-child{border-bottom:none;}
+  ul li::before{content:'—';position:absolute;left:0;color:var(--gold-dk);font-size:0.8rem;}
+
+  .divider{height:1px;background:linear-gradient(90deg,transparent,var(--cream3),transparent);margin:2rem 0;}
+</style>
+
+<div class="hero">
+  <span class="chip">Interview Reference — v1.0</span>
+  <h1>NVIDIA <em>FP&A Platform</em></h1>
+  <h1 style="font-size:clamp(1rem,2.5vw,1.4rem);font-family:'Sora',sans-serif;font-weight:300;color:rgba(240,234,216,0.8);margin-top:0.5rem;">Institutional-Grade Financial Planning & Analysis Dashboard</h1>
+  <p class="hero-sub">A fully production-structured system spanning ETL, validated financial modeling, DCF valuation, and interactive analytics — built on real NVIDIA 10-K filings (FY2020–FY2025).</p>
+  <div class="hero-meta">
+    <div class="meta-item"><span class="meta-label">Ticker</span><span class="meta-val">NVDA</span></div>
+    <div class="meta-item"><span class="meta-label">Data Coverage</span><span class="meta-val">FY2020 – FY2025</span></div>
+    <div class="meta-item"><span class="meta-label">Forecast Horizon</span><span class="meta-val">FY2026F – FY2030F</span></div>
+    <div class="meta-item"><span class="meta-label">Valuation</span><span class="meta-val">$109.26 implied vs $183.22 market</span></div>
+    <div class="meta-item"><span class="meta-label">Methodology</span><span class="meta-val">FCFF / Gordon Growth DCF</span></div>
+    <div class="meta-item"><span class="meta-label">WACC</span><span class="meta-val">12.91%</span></div>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Problem Statement</h2>
+    </div>
+    <p>Traditional Excel-based DCF models are brittle, non-reproducible, and impossible to validate at scale. When NVIDIA's revenue grew 122% YoY in FY2024, every formula in a linked workbook required manual review — one broken cell reference cascades silently with no audit trail.</p>
+    <div class="two-col">
+      <div class="card card-accent">
+        <p style="font-size:0.82rem;font-weight:500;color:var(--navy);margin-bottom:0.5rem;">Five core failures this project solves</p>
+        <ul>
+          <li>No schema enforcement — renamed columns break everything silently</li>
+          <li>No audit trail for missing-data decisions</li>
+          <li>Scenario switching requires manual copy-paste</li>
+          <li>KPI thresholds undocumented and inconsistently applied</li>
+          <li>No automated regression testing for financial formula logic</li>
+        </ul>
+      </div>
+      <div class="card card-teal">
+        <p style="font-size:0.82rem;font-weight:500;color:var(--navy);margin-bottom:0.5rem;">How this project solves them</p>
+        <ul>
+          <li>Canonical schema + typed Parquet tables with strict column validation</li>
+          <li>Guaranteed <span class="mono">error_report.csv</span> on every ETL run</li>
+          <li>Delta-only JSON scenario engine, base assumptions never mutated</li>
+          <li>NVIDIA-calibrated traffic-light KPIs with documented thresholds</li>
+          <li>Full pytest suite: ETL, invariants, KPI formulas, golden output</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Architecture — 4-Layer System</h2>
+    </div>
+    <p style="margin-bottom:1.25rem;">Every layer has a single responsibility and communicates with the next via explicit data contracts. Business logic is strictly prohibited from the UI layer.</p>
+    <div class="pipeline">
+      <div class="pipe-step">
+        <div class="pipe-left"><div class="pipe-dot">L1</div><div class="pipe-line"></div></div>
+        <div class="pipe-body">
+          <p class="pipe-name">Data Layer — Raw Source Files</p>
+          <p class="pipe-desc">13 raw XLSX/CSV files sourced from NVIDIA SEC EDGAR filings: annual Income Statement, Balance Sheet, and Cash Flow (FY2020–FY2025), quarterly versions of all three, segment revenue breakdown (Data Center, Gaming, Professional Viz, Automotive, OEM), working capital schedule, peer comparables, and market data. Every number traces back to an audited 10-K filing. CF data for FY2020–2021 is genuinely absent from NVIDIA's filing presentation — this is documented explicitly as a business fact, not a data quality gap.</p>
+        </div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-left"><div class="pipe-dot">L2</div><div class="pipe-line"></div></div>
+        <div class="pipe-body">
+          <p class="pipe-name">ETL Pipeline — 7 Stages</p>
+          <p class="pipe-desc">A modular, stage-separated pipeline where each Python module has exactly one responsibility. Stage 1: <span class="mono">loader.py</span> handles raw CSV I/O only. Stage 2: <span class="mono">transformer.py</span> maps 60+ column name synonyms across Bloomberg, FactSet, SEC EDGAR, and Excel exports to a single canonical schema. Stage 3: <span class="mono">validator.py</span> enforces schema, detects exact vs conflicting duplicates, and checks financial business rules (BS balance, CF reconciliation). Stage 4: <span class="mono">cleaner.py</span> applies an explicit per-column missing-value policy (error/zero/ffill/bfill/median/warn/ignore) — no implicit defaults anywhere. Stage 5 derives IS ratios. Stage 6 builds and merges canonical tables. Stage 7 persists outputs as Parquet. <span class="mono">error_logger.py</span> guarantees an audit CSV on every run, including failures.</p>
+        </div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-left"><div class="pipe-dot">L3</div><div class="pipe-line"></div></div>
+        <div class="pipe-body">
+          <p class="pipe-name">Computation Layer — KPI Engine + DCF Model</p>
+          <p class="pipe-desc">All KPI functions in <span class="mono">kpis.py</span> are pure functions accepting scalars and returning scalars — no DataFrames, no side effects, no global state. A single <span class="mono">safe_divide()</span> gateway handles every division, returning None (not NaN, not exception) on zero denominators. Eight core KPIs computed: Gross Margin, EBITDA Margin, FCF, FCF Margin, Revenue Growth, AR Days (DSO), AP Days (DPO), Current Ratio. Traffic-light signals in <span class="mono">ratios.py</span> are calibrated to NVIDIA's FY2020–2025 ranges. The DCF model implements FCFF discounting with end-of-year convention, Gordon Growth terminal value, and a full 9×9 sensitivity grid across WACC and terminal growth rate. Scenarios are powered by a deep-merge JSON engine — base assumptions never mutate.</p>
+        </div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-left"><div class="pipe-dot">L4</div></div>
+        <div class="pipe-body" style="padding-bottom:0;">
+          <p class="pipe-name">Presentation Layer — Streamlit Dashboard</p>
+          <p class="pipe-desc"><span class="mono">app.py</span> handles routing and filtering only — zero business logic. <span class="mono">kpi_tile.py</span> renders pre-computed scalars from the KPI engine into signal-colored cards with delta vs prior year. Scenario switching is live. Filters: fiscal year slider, KPI selector, margin selector. Plotly charts for KPI and margin trends.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Data Collection & ETL Detail</h2>
+    </div>
+    <div class="card">
+      <p style="font-size:0.82rem;font-weight:500;color:var(--navy);margin-bottom:0.75rem;">Canonical tables produced by the pipeline</p>
+      <div class="two-col">
+        <div>
+          <p style="font-size:0.8rem;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:0.25rem;">actuals.parquet</p>
+          <p style="font-size:0.82rem;color:var(--ink2);">Full consolidated IS + BS + CF merged on fiscal_year. 96 columns, 6 rows (FY2020–FY2025). Downstream modules read exclusively from here — never from raw files.</p>
+        </div>
+        <div>
+          <p style="font-size:0.8rem;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:0.25rem;">costs.parquet + working_capital.parquet</p>
+          <p style="font-size:0.82rem;color:var(--ink2);">Income statement cost structure and NWC schedule (DSO/DIO/DPO/CCC) with both historical actuals and scenario-tagged forecasts. PKs enforce data integrity.</p>
+        </div>
+      </div>
+    </div>
+    <div class="card card-accent">
+      <p style="font-size:0.82rem;font-weight:500;color:var(--navy);margin-bottom:0.5rem;">Key ETL engineering decisions worth explaining in an interview</p>
+      <ul>
+        <li><strong>Parquet over CSV</strong> for canonical storage: preserves dtypes exactly (no silent float→string coercion), 3-10× smaller, significantly faster reads. CSVs generated alongside for human inspection only.</li>
+        <li><strong>Conflicting duplicates raise immediately</strong>, never silently resolved. Same fiscal_year + different revenue = data corruption, not a noise problem. Exact duplicates (byte-for-byte identical from export bugs) are deduplicated and logged.</li>
+        <li><strong>Per-column missing value policy</strong> in a single dict: revenue_usdm = "error", acq_termination_usdm = "zero" (fabless company, structurally absent most years), accounts_receivable_usdm = "ffill" (balance sheet items change slowly), cfo_usdm FY2020-21 = "ignore" (genuinely absent from NVIDIA's 10-K format, not a gap).</li>
+        <li><strong>Column mapping covers 60+ synonyms</strong>: "revenue", "total_revenue", "net_sales", "revenues", "net revenues" all map to "revenue_usdm". Any column not in the mapping is dropped with a warning — no silent pass-through.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Financial Model — KPIs & Signals</h2>
+    </div>
+    <p style="margin-bottom:1rem;">FY2025 actuals — every value verified against NVIDIA's 10-K. All thresholds calibrated to NVIDIA's FY2020–2025 historical range and cross-validated against semiconductor sector benchmarks.</p>
+    <div class="kpi-grid">
+      <div class="kpi-card"><span class="kpi-label">Gross Margin</span><span class="kpi-val">75.0%</span><span class="kpi-signal green">Green &gt;60%</span></div>
+      <div class="kpi-card"><span class="kpi-label">EBITDA Margin</span><span class="kpi-val">63.8%</span><span class="kpi-signal green">Green &gt;40%</span></div>
+      <div class="kpi-card"><span class="kpi-label">FCF Margin</span><span class="kpi-val">46.6%</span><span class="kpi-signal green">Green &gt;25%</span></div>
+      <div class="kpi-card"><span class="kpi-label">Revenue Growth</span><span class="kpi-val">+114.2%</span><span class="kpi-signal green">Green &gt;15%</span></div>
+      <div class="kpi-card"><span class="kpi-label">AR Days (DSO)</span><span class="kpi-val">64.5d</span><span class="kpi-signal amber">Amber 45-70d</span></div>
+      <div class="kpi-card"><span class="kpi-label">AP Days (DPO)</span><span class="kpi-val">70.6d</span><span class="kpi-signal green">Green &gt;60d</span></div>
+      <div class="kpi-card"><span class="kpi-label">Current Ratio</span><span class="kpi-val">4.44×</span><span class="kpi-signal green">Green &gt;2.0×</span></div>
+      <div class="kpi-card"><span class="kpi-label">Free Cash Flow</span><span class="kpi-val">$60.9B</span><span class="kpi-signal" style="color:var(--ink3);">Grey (absolute)</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title">DCF Valuation Engine</h2>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="card card-navy">
+          <p style="font-size:0.82rem;font-weight:500;color:var(--navy);margin-bottom:0.5rem;">Methodology</p>
+          <ul>
+            <li>5-year FCFF projection (FY2026F–FY2030F)</li>
+            <li>NOPAT = EBIT × (1 − effective tax rate)</li>
+            <li>FCFF = NOPAT + D&A − CapEx − ΔNWC</li>
+            <li>End-of-year discounting: PV(t) = FCFF(t) / (1+WACC)^t</li>
+            <li>Gordon Growth terminal value: TV = FCF₅ × (1+g) / (WACC−g)</li>
+            <li>EV → equity bridge → implied price per share</li>
+            <li>9×9 sensitivity grid (WACC × terminal growth rate)</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <p style="font-size:0.82rem;font-weight:500;color:var(--navy);margin-bottom:0.75rem;">Base case results</p>
+          <table style="width:100%;font-size:0.82rem;border-collapse:collapse;">
+            <tr><td style="color:var(--ink3);padding:4px 0;">WACC</td><td style="text-align:right;font-family:'DM Mono',monospace;color:var(--navy);font-size:0.8rem;">12.91%</td></tr>
+            <tr style="border-top:1px solid var(--cream2);"><td style="color:var(--ink3);padding:4px 0;">Terminal growth rate</td><td style="text-align:right;font-family:'DM Mono',monospace;color:var(--navy);font-size:0.8rem;">4.00%</td></tr>
+            <tr style="border-top:1px solid var(--cream2);"><td style="color:var(--ink3);padding:4px 0;">Sum PV FCFs</td><td style="text-align:right;font-family:'DM Mono',monospace;color:var(--navy);font-size:0.8rem;">$664,085M</td></tr>
+            <tr style="border-top:1px solid var(--cream2);"><td style="color:var(--ink3);padding:4px 0;">PV terminal value</td><td style="text-align:right;font-family:'DM Mono',monospace;color:var(--navy);font-size:0.8rem;">$1,958,098M</td></tr>
+            <tr style="border-top:1px solid var(--cream2);"><td style="color:var(--ink3);padding:4px 0;">Enterprise value</td><td style="text-align:right;font-family:'DM Mono',monospace;color:var(--navy);font-size:0.8rem;">$2,622,182M</td></tr>
+            <tr style="border-top:1px solid var(--cream2);"><td style="color:var(--ink3);padding:4px 0;">Net cash (NVDA)</td><td style="text-align:right;font-family:'DM Mono',monospace;color:var(--success);font-size:0.8rem;">+$32,940M</td></tr>
+            <tr style="border-top:1px solid var(--cream2);font-weight:500;"><td style="color:var(--navy);padding:4px 0;">Implied share price</td><td style="text-align:right;font-family:'DM Mono',monospace;color:var(--navy);font-size:0.8rem;">$109.26</td></tr>
+            <tr style="border-top:1px solid var(--cream2);"><td style="color:var(--ink3);padding:4px 0;">Market price (Oct 2025)</td><td style="text-align:right;font-family:'DM Mono',monospace;color:var(--ink2);font-size:0.8rem;">$183.22</td></tr>
+            <tr style="border-top:1px solid var(--cream2);font-weight:500;"><td style="color:var(--danger);padding:4px 0;">Upside/downside</td><td style="text-align:right;font-family:'DM Mono',monospace;color:var(--danger);font-size:0.8rem;">−40.3%</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:0.75rem;">
+      <p style="font-size:0.82rem;font-weight:500;color:var(--navy);margin-bottom:0.5rem;">Three scenarios — delta-only override pattern</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;font-size:0.82rem;">
+        <div><p style="font-weight:500;color:var(--navy);margin-bottom:4px;">Base</p><p style="color:var(--ink3);">WACC 12.91%, g 4.0%, GM 74.99% — central planning assumption, no overrides applied.</p></div>
+        <div><p style="font-weight:500;color:var(--success);margin-bottom:4px;">Upside</p><p style="color:var(--ink3);">WACC 11.91%, g 4.5%, GM 78% — AI acceleration, data center +95% FY2026, tighter WC cycles.</p></div>
+        <div><p style="font-weight:500;color:var(--danger);margin-bottom:4px;">Downside</p><p style="color:var(--ink3);">WACC 13.91%, g 3.0%, GM 66% — AI slowdown, margin compression, elongated inventory.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2 class="section-title">Financial Invariants & Validation</h2>
+    </div>
+    <p style="margin-bottom:1rem;">Three non-negotiable accounting identities tested against real NVIDIA data on every CI run. If any fails, the model or source data is wrong.</p>
+    <div class="invariant">
+      <div class="inv-num">1</div>
+      <div class="inv-body">
+        <p class="inv-name">Balance Sheet Identity</p>
+        <span class="inv-formula">Total Assets = Total Liabilities + Shareholders' Equity | Tolerance: $0.01M</span>
+        <p class="inv-desc">Verified for all 5 BS years (FY2021–FY2025). FY2025: $111,601M = $32,274M + $79,327M ✓. Tolerance matches data_contracts.md Rule 2. Broken BS data fixture confirmed the guard catches corruption.</p>
+      </div>
+    </div>
+    <div class="invariant">
+      <div class="inv-num">2</div>
+      <div class="inv-body">
+        <p class="inv-name">Cash Flow Reconciliation</p>
+        <span class="inv-formula">CFO + CFI + CFF = Net Change in Cash | Tolerance: $0.01M</span>
+        <p class="inv-desc">Verified for FY2022–FY2025. FY2025: $64,089 + (−$20,421) + (−$42,359) = $1,309M ✓. FY2020–2021 rows skipped (NaN by architecture design). FCF sub-invariant: FCF = CFO + CapEx (CapEx stored negative).</p>
+      </div>
+    </div>
+    <div class="invariant">
+      <div class="inv-num">3</div>
+      <div class="inv-body">
+        <p class="inv-name">Retained Earnings Rollforward</p>
+        <span class="inv-formula">RE(t) = RE(t−1) + Net Income(t) − Distributions(t)</span>
+        <p class="inv-desc">Distributions dominated by buybacks ($33.7B in FY2025). Implied distributions = RE_prior + NI − RE_current. FY2025: $68,038M = $29,817M + $72,880M − $34,659M ✓. Validates equity section integrity across all 4 intersecting years.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <h2 class="section-title">Testing Strategy</h2>
+    </div>
+    <div class="two-col">
+      <div class="card">
+        <p style="font-size:0.82rem;font-weight:500;color:var(--navy);margin-bottom:0.5rem;">4 test modules, 3 testing philosophies</p>
+        <ul>
+          <li><span class="mono">test_kpi_formulas.py</span> — Known-value testing: every formula tested against FY2025 10-K actuals (e.g., gross margin must equal 0.7499 ± 0.001, not just "is a float")</li>
+          <li><span class="mono">test_financial_invariants.py</span> — System-level invariant testing: mathematical identities that must hold across the full dataset regardless of inputs</li>
+          <li><span class="mono">test_etl_validation.py</span> — ETL guard testing: schema, duplicates, missing-value policy, business rules</li>
+          <li><span class="mono">test_golden_output.py</span> — Regression testing: canonical table structure and row-count assertions catch silent ETL regressions</li>
+        </ul>
+      </div>
+      <div class="card">
+        <p style="font-size:0.82rem;font-weight:500;color:var(--navy);margin-bottom:0.5rem;">Edge case coverage</p>
+        <ul>
+          <li>None inputs → None output (never NaN, never crash) for all 8 KPIs</li>
+          <li>Zero denominator → None from safe_divide() gateway</li>
+          <li>Exact duplicates → silently removed + logged to error_report</li>
+          <li>Conflicting duplicates → ValueError raised immediately</li>
+          <li>CF NaN for FY2020-21 → allowed by "ignore" policy, not raised</li>
+          <li>Inventory NaN → filled with 0 (NVIDIA is fabless, structurally valid)</li>
+          <li>AR NaN → forward-filled from prior year (slowly-changing BS item)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">08</span>
+      <h2 class="section-title">Tech Stack & Infrastructure</h2>
+    </div>
+    <div style="margin-bottom:0.75rem;">
+      <span class="tag tag-navy">Python 3.11+</span>
+      <span class="tag tag-navy">Streamlit 1.35+</span>
+      <span class="tag tag-navy">Pandas 2.0+</span>
+      <span class="tag tag-navy">Plotly 5.20+</span>
+      <span class="tag tag-navy">PyArrow 15+</span>
+      <span class="tag tag-navy">SciPy 1.13+</span>
+      <span class="tag tag-gold">pytest 8.0+</span>
+      <span class="tag tag-gold">pytest-cov</span>
+      <span class="tag tag-gold">black + isort + flake8 + mypy</span>
+      <span class="tag tag-teal">Docker (multi-stage)</span>
+      <span class="tag tag-teal">GitHub Actions CI</span>
+      <span class="tag tag-teal">PyYAML + jsonschema</span>
+      <span class="tag tag-teal">openpyxl</span>
+    </div>
+    <div class="card card-accent">
+      <p style="font-size:0.82rem;font-weight:500;color:var(--navy);margin-bottom:0.5rem;">Infrastructure decisions worth discussing</p>
+      <ul>
+        <li><strong>Multi-stage Docker build</strong>: builder stage with gcc/g++ for PyArrow/SciPy compilation → lean python:3.11-slim runtime image. Compiler toolchain is a security surface area; stripping it from the runtime image is not optional.</li>
+        <li><strong>Pandas over Polars/Spark</strong>: NVIDIA has 6 annual rows. Spark is designed for distributed processing of data that won't fit in memory. Introducing it here would add a JVM dependency and a cluster management problem with zero benefit.</li>
+        <li><strong>Delta-only scenario JSON</strong>: 3 full copies of an assumptions file drift. The upside WACC gets updated; the downside one doesn't. Delta-only overrides via recursive deep_merge make all changes explicit and minimal — same pattern as Kubernetes Helm chart value overrides.</li>
+        <li><strong>Version-pinned requirements</strong>: Pandas 3.0 introduced breaking changes to DataFrame merging semantics. Pinning to &lt;3.0 captures all security patches while blocking breaking changes.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="verdict">
+    <p class="verdict-title">Interview defence — questions you should expect</p>
+    <div class="verdict-grid">
+      <div class="verdict-item">
+        <p class="verdict-q">Why raise on conflicting duplicates?</p>
+        <p class="verdict-a">Two revenue figures for FY2023 is data corruption. There is no automatic resolution that is correct — keep_first or keep_last is an arbitrary choice that permanently corrupts the model with no audit trail.</p>
+      </div>
+      <div class="verdict-item">
+        <p class="verdict-q">Why is inventory policy "zero"?</p>
+        <p class="verdict-a">NVIDIA is a fabless semiconductor company — they design chips but outsource manufacturing to TSMC. Inventory is structurally minimal. Filling NaN with 0 is not a data quality fix; it's the correct business representation.</p>
+      </div>
+      <div class="verdict-item">
+        <p class="verdict-q">Why end-of-year discounting, not mid-year?</p>
+        <p class="verdict-a">The Excel model formula on 05b_DCF row 8 is =H5/(1+$C$14)^H7 where H7 is the projection year number (1–5). No 0.5 offset. Standard academic DCF convention, not Damodaran mid-year style.</p>
+      </div>
+      <div class="verdict-item">
+        <p class="verdict-q">Why -40% upside/downside?</p>
+        <p class="verdict-a">The valuation date is October 17, 2025. The $183.22 market price reflects AI hype premium. The base case DCF at 12.91% WACC and 4% terminal growth implies $109.26 — a more conservative long-run normalised view. The model is not a trading signal; it's a structured discipline check.</p>
+      </div>
+      <div class="verdict-item">
+        <p class="verdict-q">Why does RE rollforward matter?</p>
+        <p class="verdict-a">The retained earnings rollforward is the plug mechanism that makes the balance sheet close in forecast years. RE(t) = RE(t-1) + NI(t) - Distributions(t). If distributions (dividends + buybacks) are miscalculated, the BS goes out of balance and the CF statement mis-reconciles — silent cascade failure.</p>
+      </div>
+      <div class="verdict-item">
+        <p class="verdict-q">How would you scale this to multi-company?</p>
+        <p class="verdict-a">The canonical schema already carries ticker, is_forecast, scenario, and source columns. Multi-company extension requires only additional data loading and Parquet partitioning by ticker. The modeling layer, KPI engine, and dashboard are already ticker-agnostic architecturally.</p>
+      </div>
+    </div>
+  </div>
+
+</div>

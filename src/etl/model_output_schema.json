@@ -1,0 +1,249 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ModelOutput",
+  "description": "Output schema for NVIDIA DCF model. Matches the full dict returned by modeling.engine.run_pipeline().",
+  "type": "object",
+  "required": [
+    "income_statement",
+    "balance_sheet",
+    "cash_flow_statement",
+    "fcff",
+    "dcf_valuation",
+    "comps",
+    "reconciliation",
+    "scenario",
+    "assumptions_used",
+    "run_timestamp",
+    "status",
+    "duration_seconds"
+  ],
+  "properties": {
+    "income_statement": {
+      "description": "pd.DataFrame — 5 rows (FY2026F–FY2030F). Index: fiscal_year.",
+      "type": "object",
+      "properties": {
+        "_required_columns": {
+          "const": [
+            "fiscal_year", "revenue_usdm", "cogs_usdm", "gross_profit_usdm",
+            "rd_expense_usdm", "sga_expense_usdm", "total_opex_usdm",
+            "ebit_usdm", "da_usdm", "ebitda_usdm", "ebt_usdm",
+            "income_tax_usdm", "effective_tax_rate_pct", "net_income_usdm",
+            "gross_margin_pct", "ebit_margin_pct", "ebitda_margin_pct", "net_margin_pct"
+          ]
+        }
+      }
+    },
+
+    "balance_sheet": {
+      "description": "pd.DataFrame — 5 rows (FY2026F–FY2030F). Projected balance sheet. Accounting invariant: total_assets_usdm == total_liabilities_usdm + shareholders_equity_usdm (tolerance $0.01M). RE rollforward: retained_earnings_t == retained_earnings_{t-1} + net_income_t - distributions_t.",
+      "type": "object",
+      "properties": {
+        "_required_columns": {
+          "const": [
+            "fiscal_year", "ticker",
+            "cash_and_investments_usdm",
+            "accounts_receivable_usdm",
+            "inventory_usdm",
+            "prepaid_expenses_usdm",
+            "total_current_assets_usdm",
+            "net_ppe_usdm",
+            "total_assets_usdm",
+            "accounts_payable_usdm",
+            "accrued_liabilities_usdm",
+            "short_term_debt_usdm",
+            "total_current_liabilities_usdm",
+            "long_term_debt_usdm",
+            "total_liabilities_usdm",
+            "retained_earnings_usdm",
+            "shareholders_equity_usdm",
+            "is_forecast",
+            "scenario"
+          ]
+        },
+        "_invariant_bs_identity": {
+          "const": "total_assets_usdm == total_liabilities_usdm + shareholders_equity_usdm (tolerance 0.01)"
+        },
+        "_invariant_re_rollforward": {
+          "const": "retained_earnings_t == retained_earnings_{t-1} + net_income_t - distributions_t (tolerance 0.01)"
+        },
+        "_invariant_cash_link": {
+          "const": "cash_and_investments_usdm == prior_ending_cash + net_change_cash_usdm (tolerance 0.01)"
+        }
+      }
+    },
+
+    "cash_flow_statement": {
+      "description": "pd.DataFrame — 5 rows (FY2026F–FY2030F). Key CF line items. CF invariant: cfo_usdm + cfi_usdm + cff_usdm == net_change_cash_usdm (tolerance $0.01M). FCF invariant: fcf_usdm == cfo_usdm + capex_usdm (capex stored as negative). Cash link: ending_cash_usdm == prior_ending_cash + net_change_cash_usdm.",
+      "type": "object",
+      "properties": {
+        "_required_columns": {
+          "const": [
+            "fiscal_year",
+            "net_income_usdm",
+            "da_usdm",
+            "change_in_nwc_usdm",
+            "capex_usdm",
+            "cfo_usdm",
+            "cfi_usdm",
+            "cff_usdm",
+            "fcf_usdm",
+            "net_change_cash_usdm",
+            "ending_cash_usdm",
+            "beginning_cash_usdm"
+          ]
+        },
+        "_invariant_cf_reconciliation": {
+          "const": "cfo_usdm + cfi_usdm + cff_usdm == net_change_cash_usdm (tolerance 0.01)"
+        },
+        "_invariant_fcf": {
+          "const": "fcf_usdm == cfo_usdm + capex_usdm (capex is negative; tolerance 0.01)"
+        },
+        "_invariant_ending_cash": {
+          "const": "ending_cash_usdm == prior_ending_cash_usdm + net_change_cash_usdm (tolerance 0.01)"
+        }
+      }
+    },
+
+    "fcff": {
+      "description": "pd.DataFrame — 5 rows. Unlevered Free Cash Flow to Firm.",
+      "type": "object",
+      "properties": {
+        "_required_columns": {
+          "const": [
+            "fiscal_year", "revenue_usdm", "ebit_usdm", "nopat_usdm",
+            "da_usdm", "capex_usdm", "change_in_nwc_usdm",
+            "fcff_usdm", "pv_fcff_usdm", "projection_year"
+          ]
+        }
+      }
+    },
+
+    "dcf_valuation": {
+      "description": "Scalar dict — DCF enterprise-to-equity bridge plus sensitivity and cross-check outputs. All $M except share price.",
+      "type": "object",
+      "required": [
+        "scenario",
+        "wacc_used",
+        "terminal_growth_rate",
+        "discounting_convention",
+        "terminal_value_method",
+        "fcff_by_year",
+        "pv_fcff_by_year",
+        "sum_pv_fcf_usdm", "terminal_value_usdm", "pv_terminal_value_usdm",
+        "enterprise_value_usdm", "net_debt_usdm", "equity_value_usdm",
+        "diluted_shares_millions", "implied_share_price_usd", "market_price_usd",
+        "upside_downside_pct", "net_debt_bridge", "sensitivity", "cross_check"
+      ],
+      "properties": {
+        "scenario":                   {"type": "string", "enum": ["base", "upside", "downside"]},
+        "wacc_used":                  {"type": "number", "minimum": 0, "maximum": 1},
+        "terminal_growth_rate":       {"type": "number", "minimum": 0, "maximum": 0.10},
+        "discounting_convention":     {"type": "string"},
+        "terminal_value_method":      {"type": "string"},
+        "fcff_by_year":               {"type": "object"},
+        "pv_fcff_by_year":            {"type": "object"},
+        "sum_pv_fcf_usdm":           {"type": "number"},
+        "terminal_value_usdm":        {"type": "number", "minimum": 0},
+        "pv_terminal_value_usdm":     {"type": "number", "minimum": 0},
+        "enterprise_value_usdm":      {"type": "number", "minimum": 0},
+        "net_debt_bridge":            {"type": "object"},
+        "net_debt_usdm":              {"type": "number"},
+        "equity_value_usdm":          {"type": "number"},
+        "diluted_shares_millions":    {"type": "number", "minimum": 0},
+        "implied_share_price_usd":    {"type": "number"},
+        "market_price_usd":           {"type": "number", "minimum": 0},
+        "upside_downside_pct":        {"type": "number"},
+        "sensitivity":                {"type": ["object", "null"]},
+        "cross_check":                {"type": "object"}
+      }
+    },
+
+    "comps": {
+      "description": "Comparable-company analysis output from src.modeling.comps.run_comps().",
+      "type": "object",
+      "required": ["meta", "subject_inputs", "peer_multiples", "multiple_statistics", "implied_prices", "summary"],
+      "properties": {
+        "meta": {"type": "object"},
+        "subject_inputs": {"type": "object"},
+        "peer_multiples": {"type": "array"},
+        "multiple_statistics": {"type": "object"},
+        "implied_prices": {"type": "object"},
+        "summary": {"type": "object"}
+      }
+    },
+
+    "reconciliation": {
+      "description": "Reconciliation and invariant-check output from src.modeling.reconciliation.run_all_checks().",
+      "type": "object",
+      "required": ["all_passed", "bs_checks", "cf_checks", "revenue_checks", "dcf_check", "failures", "summary"],
+      "properties": {
+        "all_passed": {"type": "boolean"},
+        "bs_checks": {"type": "object"},
+        "cf_checks": {"type": "object"},
+        "revenue_checks": {"type": "object"},
+        "dcf_check": {"type": "object"},
+        "failures": {"type": "array"},
+        "summary": {"type": "object"}
+      }
+    },
+
+    "scenario": {
+      "type": "string",
+      "enum": ["base", "upside", "downside"]
+    },
+
+    "assumptions_used": {
+      "description": "Deep copy snapshot of final_assumptions at model run time",
+      "type": "object"
+    },
+
+    "run_timestamp": {
+      "type": "string"
+    },
+
+    "status": {
+      "type": "string",
+      "enum": ["PASS", "WARN"]
+    },
+
+    "duration_seconds": {
+      "type": "number",
+      "minimum": 0
+    }
+  },
+
+  "kpi_output_schema": {
+    "description": "KPIOutput — scalars only (float | None). None is a valid value (div-by-zero contract). Never DataFrame.",
+    "type": "object",
+    "required": [
+      "gross_margin_pct", "ebit_margin_pct", "ebitda_margin_pct", "net_margin_pct",
+      "fcf_margin_pct", "revenue_growth_yoy_pct",
+      "ar_days_dso", "inventory_days_dio", "ap_days_dpo", "cash_conversion_cycle_days",
+      "current_ratio",
+      "implied_share_price_usd", "enterprise_value_usdm",
+      "scenario", "fiscal_year"
+    ],
+    "properties": {
+      "gross_margin_pct":            {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+      "ebit_margin_pct":             {"type": ["number", "null"], "minimum": -1, "maximum": 1},
+      "ebitda_margin_pct":           {"type": ["number", "null"], "minimum": -1, "maximum": 1},
+      "net_margin_pct":              {"type": ["number", "null"], "minimum": -1, "maximum": 1},
+      "rd_pct_revenue":              {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+      "fcf_margin_pct":              {"type": ["number", "null"]},
+      "revenue_growth_yoy_pct":      {"type": ["number", "null"]},
+      "ar_days_dso":                 {"type": ["number", "null"], "minimum": 0},
+      "inventory_days_dio":          {"type": ["number", "null"], "minimum": 0},
+      "ap_days_dpo":                 {"type": ["number", "null"], "minimum": 0},
+      "cash_conversion_cycle_days":  {"type": ["number", "null"]},
+      "current_ratio":               {"type": ["number", "null"], "minimum": 0},
+      "implied_share_price_usd":     {"type": ["number", "null"]},
+      "enterprise_value_usdm":       {"type": ["number", "null"], "minimum": 0},
+      "ev_revenue_x":                {"type": ["number", "null"], "minimum": 0},
+      "ev_ebitda_x":                 {"type": ["number", "null"]},
+      "pe_ratio_x":                  {"type": ["number", "null"]},
+      "upside_downside_pct":         {"type": ["number", "null"]},
+      "scenario":                    {"type": "string", "enum": ["base", "upside", "downside"]},
+      "fiscal_year":                 {"type": "integer"}
+    }
+  }
+}
