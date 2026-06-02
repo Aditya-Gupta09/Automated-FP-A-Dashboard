@@ -25,15 +25,15 @@ Function signature per module_mapping.md:
 """
 
 from __future__ import annotations
-import json
+
 import copy
+import json
 import logging
-import os
-from pathlib import Path
 from datetime import datetime
-from typing import Optional
+from pathlib import Path
 
 import pandas as pd
+
 from src.etl.data_contracts import deep_merge
 
 logger = logging.getLogger(__name__)
@@ -52,7 +52,7 @@ def _load_json(filename: str) -> dict:
         raise FileNotFoundError(
             f"[engine] Config file not found: {path}. " f"Expected in {_CONFIG_DIR}/"
         )
-    with open(path, "r", encoding="utf-8") as f:
+    with open(path, encoding="utf-8") as f:
         return json.load(f)
 
 
@@ -111,8 +111,8 @@ def _revenue_from_is(is_df: pd.DataFrame) -> pd.Series:
 def run_pipeline(
     scenario: str = "base",
     verbose: bool = False,
-    canonical_data: Optional[dict] = None,
-    assumptions_override: Optional[dict] = None,
+    canonical_data: dict | None = None,
+    assumptions_override: dict | None = None,
 ) -> dict:
     """
     Master orchestrator. Runs all modeling modules in dependency order.
@@ -183,7 +183,7 @@ def run_pipeline(
     # ── Step 2: Income Statement ──────────────────────────────────────────
     if verbose:
         print("  Step 2/10: Income Statement...")
-    from src.modeling.income_statement import build_revenue, build_income_statement
+    from src.modeling.income_statement import build_income_statement, build_revenue
 
     revenue_df = build_revenue(final_assumptions, scenario)
     is_df = build_income_statement(revenue_df, final_assumptions, scenario)
@@ -396,11 +396,11 @@ def run_3stmt(
     # Inject assumptions into config temporarily for run_pipeline
     # In production, engine reads from config/ — this wrapper supports
     # the run_3stmt(canonical_data, assumptions) contract
-    from src.modeling.income_statement import build_revenue, build_income_statement
-    from src.modeling.depreciation import build_da_schedule
-    from src.modeling.working_capital import build_nwc_schedule
     from src.modeling.balance_sheet import build_balance_sheet
     from src.modeling.cashflow import build_cashflow
+    from src.modeling.depreciation import build_da_schedule
+    from src.modeling.income_statement import build_income_statement, build_revenue
+    from src.modeling.working_capital import build_nwc_schedule
 
     revenue_df = build_revenue(assumptions, scenario)
     is_df = build_income_statement(revenue_df, assumptions, scenario)

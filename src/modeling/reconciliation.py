@@ -11,8 +11,9 @@ failures.
 
 from __future__ import annotations
 
+from collections.abc import Mapping
 from numbers import Real
-from typing import Any, Mapping
+from typing import Any
 
 # ─── TOLERANCES ───────────────────────────────────────────────────────────────
 

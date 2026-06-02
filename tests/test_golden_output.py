@@ -24,9 +24,9 @@ When you deliberately change model logic AND have verified the new output:
 """
 
 import os
+
 import pandas as pd
 import pytest
-import json
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 RAW_DATA_DIR = os.path.join(PROJECT_ROOT, "data", "raw")

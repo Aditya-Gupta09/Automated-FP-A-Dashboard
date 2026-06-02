@@ -10,10 +10,10 @@ All cleaning/mapping happens downstream in validator → cleaner → transformer
 Architecture slot: [LOADER] → validator → cleaner → transformer → canonical
 """
 
-import pandas as pd
-import os
 import logging
-from src.utils.error_logger import log_error
+import os
+
+import pandas as pd
 
 logger = logging.getLogger(__name__)
 

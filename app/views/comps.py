@@ -4,8 +4,10 @@ Light theme · comparable analysis · EV multiples
 """
 
 from __future__ import annotations
+
 import math
 from typing import Any
+
 import plotly.graph_objects as go
 import streamlit as st
 

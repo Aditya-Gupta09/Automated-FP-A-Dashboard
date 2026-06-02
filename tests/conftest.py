@@ -16,9 +16,10 @@ All dollar values are in $M (USD millions) per data_contracts.md.
 
 import json
 import os
+
 import numpy as np
-import pytest
 import pandas as pd
+import pytest
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 RAW_DATA_DIR = os.path.join(PROJECT_ROOT, "data", "raw")

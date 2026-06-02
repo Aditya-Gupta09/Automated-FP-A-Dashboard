@@ -4,8 +4,9 @@ Light theme · waterfall with floating bars
 """
 
 from __future__ import annotations
-from pathlib import Path
+
 from typing import Any
+
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st

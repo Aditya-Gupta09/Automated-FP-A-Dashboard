@@ -4,10 +4,12 @@ Light theme + filter bar + all features + DEMO DATA FALLBACK
 """
 
 from __future__ import annotations
+
 import sys
 from pathlib import Path
-import streamlit as st
+
 import pandas as pd
+import streamlit as st
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 APP_DIR = Path(__file__).resolve().parent
@@ -92,16 +94,16 @@ def _get_demo_results(scenario: str = "base") -> dict:
 
 
 # Component imports
-from components.kpi_tile import render_kpi_row
 from components.drivers import build_driver_bridge, render_driver_bridge
 from components.interactions import render_interactions
-from components.summary import render_dcf_summary
+from components.kpi_tile import render_kpi_row
 from components.narrative import render_narrative
 from components.sensitivity import render_sensitivity_matrix
+from components.summary import render_dcf_summary
+from views.comps import render_comps_tab
+from views.kpis import render_kpis_tab
 from views.segments import render_segments_tab
 from views.three_statement import render_three_statement_tab
-from views.kpis import render_kpis_tab
-from views.comps import render_comps_tab
 
 
 def _apply_theme() -> None:

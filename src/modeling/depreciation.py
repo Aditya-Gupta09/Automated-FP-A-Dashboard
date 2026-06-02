@@ -23,8 +23,10 @@ ALL inputs sourced from assumptions dict — zero hardcoded values.
 """
 
 from __future__ import annotations
-import pandas as pd
+
 import logging
+
+import pandas as pd
 
 logger = logging.getLogger(__name__)
 

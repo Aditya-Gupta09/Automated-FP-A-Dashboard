@@ -11,7 +11,7 @@ Source: canonical_schema.md | Author: Aditya Gupta | Oct 2025
 """
 
 from __future__ import annotations
-from typing import Optional
+
 import pandas as pd
 
 # ══════════════════════════════════════════════════════════════════════════════

@@ -24,8 +24,10 @@ Function signature per module_mapping.md:
 """
 
 from __future__ import annotations
-import pandas as pd
+
 import logging
+
+import pandas as pd
 
 logger = logging.getLogger(__name__)
 

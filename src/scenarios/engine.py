@@ -11,9 +11,11 @@ CONTRACT (matches scenarios.json + assumptions.json):
 """
 
 from __future__ import annotations
+
 import json
 from pathlib import Path
 from typing import Literal
+
 from src.etl.data_contracts import deep_merge
 
 _CONFIG = Path(__file__).parent.parent.parent / "config"
@@ -23,7 +25,7 @@ ScenarioName = Literal["base", "upside", "downside"]
 
 
 def _load_json(path: Path) -> dict:
-    with open(path, "r") as f:
+    with open(path) as f:
         return json.load(f)
 
 

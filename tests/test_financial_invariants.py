@@ -34,7 +34,7 @@ INVARIANT 3: Retained Earnings Rollforward (RE_t = RE_t-1 + NI - Div)
 """
 
 import pytest
-import pandas as pd
+
 from src.modeling.engine import run_pipeline
 
 TOLERANCE = 0.01  # $0.01M per data_contracts.md

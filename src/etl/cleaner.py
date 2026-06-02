@@ -8,9 +8,10 @@ Policy rationale is documented inline for each decision.
 Architecture slot: loader → validator → [CLEANER] → transformer → canonical
 """
 
-import pandas as pd
 import logging
-from typing import Callable
+
+import pandas as pd
+
 from src.utils.error_logger import log_error
 
 logger = logging.getLogger(__name__)

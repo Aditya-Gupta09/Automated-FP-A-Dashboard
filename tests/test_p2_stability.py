@@ -9,9 +9,9 @@ import pytest
 
 sys.path.insert(0, "src")
 
-from src.scenarios.engine import get_scenario_summary
 from src.modeling.engine import run_pipeline
 from src.modeling.reconciliation import BS_ASSUMPTIONS
+from src.scenarios.engine import get_scenario_summary
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SCENARIOS = ["base", "upside", "downside"]

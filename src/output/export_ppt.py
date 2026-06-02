@@ -22,10 +22,10 @@ Slides:
 """
 
 from __future__ import annotations
-import os
+
 import logging
+import os
 from datetime import datetime
-from typing import Optional
 
 logger = logging.getLogger(__name__)
 
@@ -42,7 +42,7 @@ _DARK = "333333"
 def generate_pptx(
     report_data: dict,
     output_dir: str = OUTPUT_DIR,
-    filename: Optional[str] = None,
+    filename: str | None = None,
 ) -> str:
     """
     Generate a board-ready PPTX report from model outputs.
@@ -65,9 +65,9 @@ def generate_pptx(
     """
     try:
         from pptx import Presentation
-        from pptx.util import Inches, Pt, Emu
         from pptx.dml.color import RGBColor
         from pptx.enum.text import PP_ALIGN
+        from pptx.util import Emu, Inches, Pt
     except ImportError:
         raise ImportError(
             "python-pptx is required for PPTX export. "

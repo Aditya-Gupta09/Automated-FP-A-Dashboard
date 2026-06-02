@@ -24,11 +24,23 @@ import pytest
 
 from src.kpi.kpis import (
     ap_days as dpo,
+)
+from src.kpi.kpis import (
     ar_days as dso,
+)
+from src.kpi.kpis import (
     ebitda_margin as kpi_ebitda_margin,
+)
+from src.kpi.kpis import (
     fcf_margin as kpi_fcf_margin,
+)
+from src.kpi.kpis import (
     free_cash_flow as fcf,
+)
+from src.kpi.kpis import (
     gross_margin,
+)
+from src.kpi.kpis import (
     revenue_growth as revenue_growth_yoy,
 )
 

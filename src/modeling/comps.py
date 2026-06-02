@@ -32,9 +32,9 @@ Usage:
     )
 """
 
-import os
 import csv
 import json
+import os
 import statistics
 from datetime import datetime
 
@@ -479,7 +479,7 @@ def run_comps(
 def _print_comps_table(peers: list, stats: dict, implied: dict, current_price: float):
     """Print comps table — mirrors original src/comps.py output."""
     print(f"\n{'─'*64}")
-    print(f"  PEER TRADING MULTIPLES")
+    print("  PEER TRADING MULTIPLES")
     print(f"{'─'*64}")
     print(f"\n  {'Company':<22} {'EV/Revenue':>11} {'EV/EBITDA':>11} {'P/E':>8}")
     print(f"  {'─'*20} {'─'*11} {'─'*11} {'─'*8}")
@@ -507,8 +507,8 @@ def _print_comps_table(peers: list, stats: dict, implied: dict, current_price: f
 # ─── CLI ──────────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
-    import sys
     import argparse
+    import sys
 
     parser = argparse.ArgumentParser(description="Comps — canonical CSV mode")
     parser.add_argument("--comps-csv", default="comps/comps_data.csv")

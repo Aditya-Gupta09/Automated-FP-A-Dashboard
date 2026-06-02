@@ -1,23 +1,22 @@
 from __future__ import annotations
 
-import ast
 import inspect
 import json
 from pathlib import Path
 
 import pytest
 
-from src.scenarios.engine import get_scenario_summary
+from src.modeling import reconciliation as reconciliation_module
 from src.modeling.comps import run_comps
 from src.modeling.engine import run_pipeline
-from src.modeling import reconciliation as reconciliation_module
 from src.modeling.working_capital import build_nwc_schedule
+from src.scenarios.engine import get_scenario_summary
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
 def _load_assumptions() -> dict:
-    with open(ROOT / "config" / "assumptions.json", "r") as f:
+    with open(ROOT / "config" / "assumptions.json") as f:
         return json.load(f)
 
 

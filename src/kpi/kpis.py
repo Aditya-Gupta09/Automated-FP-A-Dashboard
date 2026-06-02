@@ -29,14 +29,13 @@ Data assumptions (matched to cleaned_financials.csv + nvidia_historical_BS.csv):
 """
 
 from __future__ import annotations
-from typing import Optional
 
 # ── Primitive ─────────────────────────────────────────────────────────────────
 
 
 def safe_divide(
-    numerator: Optional[float], denominator: Optional[float]
-) -> Optional[float]:
+    numerator: float | None, denominator: float | None
+) -> float | None:
     """
     Safe division gateway used by every KPI formula.
 
@@ -62,7 +61,7 @@ def safe_divide(
 # ── Individual KPI functions ───────────────────────────────────────────────────
 
 
-def gross_margin(revenue: Optional[float], cogs: Optional[float]) -> Optional[float]:
+def gross_margin(revenue: float | None, cogs: float | None) -> float | None:
     """
     Gross Margin = (Revenue - COGS) / Revenue
 
@@ -82,7 +81,7 @@ def gross_margin(revenue: Optional[float], cogs: Optional[float]) -> Optional[fl
     return safe_divide(gross_profit, revenue)
 
 
-def ebitda_margin(ebitda: Optional[float], revenue: Optional[float]) -> Optional[float]:
+def ebitda_margin(ebitda: float | None, revenue: float | None) -> float | None:
     """
     EBITDA Margin = EBITDA / Revenue
 
@@ -100,7 +99,7 @@ def ebitda_margin(ebitda: Optional[float], revenue: Optional[float]) -> Optional
     return safe_divide(ebitda, revenue)
 
 
-def free_cash_flow(cfo: Optional[float], capex: Optional[float]) -> Optional[float]:
+def free_cash_flow(cfo: float | None, capex: float | None) -> float | None:
     """
     Free Cash Flow (FCF) = CFO + CapEx
 
@@ -122,7 +121,7 @@ def free_cash_flow(cfo: Optional[float], capex: Optional[float]) -> Optional[flo
     return cfo + capex  # capex is already negative
 
 
-def fcf_margin(fcf_value: Optional[float], revenue: Optional[float]) -> Optional[float]:
+def fcf_margin(fcf_value: float | None, revenue: float | None) -> float | None:
     """
     FCF Margin = FCF / Revenue
 
@@ -140,8 +139,8 @@ def fcf_margin(fcf_value: Optional[float], revenue: Optional[float]) -> Optional
 
 
 def revenue_growth(
-    rev_current: Optional[float], rev_prior: Optional[float]
-) -> Optional[float]:
+    rev_current: float | None, rev_prior: float | None
+) -> float | None:
     """
     Revenue Growth = (Rev_t - Rev_t-1) / Rev_t-1
 
@@ -161,8 +160,8 @@ def revenue_growth(
 
 
 def ar_days(
-    accounts_receivable: Optional[float], revenue: Optional[float]
-) -> Optional[float]:
+    accounts_receivable: float | None, revenue: float | None
+) -> float | None:
     """
     AR Days (DSO) = Accounts Receivable / (Revenue / 365)
 
@@ -184,8 +183,8 @@ def ar_days(
 
 
 def ap_days(
-    accounts_payable: Optional[float], cogs: Optional[float]
-) -> Optional[float]:
+    accounts_payable: float | None, cogs: float | None
+) -> float | None:
     """
     AP Days (DPO) = Accounts Payable / (COGS / 365)
 
@@ -208,8 +207,8 @@ def ap_days(
 
 
 def current_ratio(
-    current_assets: Optional[float], current_liabilities: Optional[float]
-) -> Optional[float]:
+    current_assets: float | None, current_liabilities: float | None
+) -> float | None:
     """
     Current Ratio = Current Assets / Current Liabilities
 
@@ -231,16 +230,16 @@ def current_ratio(
 
 
 def calculate_kpis(
-    revenue: Optional[float] = None,
-    cogs: Optional[float] = None,
-    ebitda: Optional[float] = None,
-    cfo: Optional[float] = None,
-    capex: Optional[float] = None,
-    accounts_receivable: Optional[float] = None,
-    accounts_payable: Optional[float] = None,
-    current_assets: Optional[float] = None,
-    current_liabilities: Optional[float] = None,
-    revenue_prior: Optional[float] = None,
+    revenue: float | None = None,
+    cogs: float | None = None,
+    ebitda: float | None = None,
+    cfo: float | None = None,
+    capex: float | None = None,
+    accounts_receivable: float | None = None,
+    accounts_payable: float | None = None,
+    current_assets: float | None = None,
+    current_liabilities: float | None = None,
+    revenue_prior: float | None = None,
 ) -> dict:
     """
     Compute all 8 KPIs from a single period's financial inputs.

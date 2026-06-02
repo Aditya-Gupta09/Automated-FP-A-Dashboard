@@ -13,8 +13,9 @@ Design principles (from SahilBuran ETL study):
 Architecture slot: data/raw → loader → validator → cleaner → [TRANSFORMER] → data/canonical
 """
 
-import pandas as pd
 import logging
+
+import pandas as pd
 
 logger = logging.getLogger(__name__)
 

@@ -4,7 +4,9 @@ Light theme · scenario-aware filtering
 """
 
 from __future__ import annotations
+
 from typing import Any
+
 import streamlit as st
 
 _BASE_PRICE = 109.26

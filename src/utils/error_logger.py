@@ -17,10 +17,11 @@ Architecture slot: error_logger is imported by all ETL modules — it is
                    NOT in the pipeline chain, it is a cross-cutting concern.
 """
 
-import pandas as pd
-import os
 import logging
+import os
 from datetime import datetime
+
+import pandas as pd
 
 logger = logging.getLogger(__name__)
 

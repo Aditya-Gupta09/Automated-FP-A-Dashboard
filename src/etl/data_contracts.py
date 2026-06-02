@@ -11,8 +11,9 @@ Source: data_contracts.md | Author: Aditya Gupta | Oct 2025
 """
 
 from __future__ import annotations
+
 import copy
-from typing import Optional
+
 import pandas as pd
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -478,10 +479,10 @@ def validate_kpi_output(kpi_output: dict) -> list[str]:
 
 
 def validate_all_contracts(
-    canonical_data: Optional[dict] = None,
-    model_input: Optional[dict] = None,
-    model_output: Optional[dict] = None,
-    kpi_output: Optional[dict] = None,
+    canonical_data: dict | None = None,
+    model_input: dict | None = None,
+    model_output: dict | None = None,
+    kpi_output: dict | None = None,
     raise_on_failure: bool = False,
 ) -> dict:
     """

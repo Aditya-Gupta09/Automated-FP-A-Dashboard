@@ -4,7 +4,9 @@ Light theme · big % KPI tiles · gradient headers
 """
 
 from __future__ import annotations
+
 from typing import Any
+
 import streamlit as st
 
 _SCENARIOS = ("base", "upside", "downside")

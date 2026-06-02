@@ -19,8 +19,10 @@ No projection logic — historical actuals only.
 """
 
 from __future__ import annotations
-import pandas as pd
+
 import logging
+
+import pandas as pd
 
 logger = logging.getLogger(__name__)
 

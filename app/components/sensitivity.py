@@ -4,7 +4,7 @@ Light theme · scenario-aware base cell
 """
 
 from __future__ import annotations
-from typing import Any
+
 import streamlit as st
 
 _EXCEL_GRID = {

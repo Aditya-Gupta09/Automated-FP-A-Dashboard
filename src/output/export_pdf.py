@@ -21,10 +21,10 @@ Sections:
 """
 
 from __future__ import annotations
-import os
+
 import logging
+import os
 from datetime import datetime
-from typing import Optional
 
 logger = logging.getLogger(__name__)
 
@@ -34,7 +34,7 @@ OUTPUT_DIR = "outputs"
 def generate_pdf(
     report_data: dict,
     output_dir: str = OUTPUT_DIR,
-    filename: Optional[str] = None,
+    filename: str | None = None,
 ) -> str:
     """
     Generate a board-ready PDF report from model outputs.
@@ -57,20 +57,20 @@ def generate_pdf(
         OSError: If output directory cannot be created
     """
     try:
-        from reportlab.lib.pagesizes import letter
-        from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-        from reportlab.lib.units import inch
         from reportlab.lib import colors
+        from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_RIGHT
+        from reportlab.lib.pagesizes import letter
+        from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+        from reportlab.lib.units import inch
         from reportlab.platypus import (
-            SimpleDocTemplate,
+            HRFlowable,
+            PageBreak,
             Paragraph,
+            SimpleDocTemplate,
             Spacer,
             Table,
             TableStyle,
-            HRFlowable,
-            PageBreak,
         )
-        from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_RIGHT
     except ImportError:
         raise ImportError(
             "reportlab is required for PDF export. "

@@ -42,7 +42,6 @@ Threshold philosophy (Task 3 — cross-validation with FP&A standards):
 """
 
 from __future__ import annotations
-from typing import Optional
 
 # Sentinel for missing data — distinct from red
 _NO_DATA = "neutral"
@@ -51,7 +50,7 @@ _NO_DATA = "neutral"
 # ── Individual signal functions ────────────────────────────────────────────────
 
 
-def gross_margin_signal(value: Optional[float]) -> str:
+def gross_margin_signal(value: float | None) -> str:
     """
     Traffic-light signal for Gross Margin.
 
@@ -78,7 +77,7 @@ def gross_margin_signal(value: Optional[float]) -> str:
     return "red"
 
 
-def ebitda_margin_signal(value: Optional[float]) -> str:
+def ebitda_margin_signal(value: float | None) -> str:
     """
     Traffic-light signal for EBITDA Margin.
 
@@ -105,7 +104,7 @@ def ebitda_margin_signal(value: Optional[float]) -> str:
     return "red"
 
 
-def fcf_margin_signal(value: Optional[float]) -> str:
+def fcf_margin_signal(value: float | None) -> str:
     """
     Traffic-light signal for FCF Margin.
 
@@ -132,7 +131,7 @@ def fcf_margin_signal(value: Optional[float]) -> str:
     return "red"
 
 
-def revenue_growth_signal(value: Optional[float]) -> str:
+def revenue_growth_signal(value: float | None) -> str:
     """
     Traffic-light signal for YoY Revenue Growth.
 
@@ -159,7 +158,7 @@ def revenue_growth_signal(value: Optional[float]) -> str:
     return "red"
 
 
-def ar_days_signal(value: Optional[float]) -> str:
+def ar_days_signal(value: float | None) -> str:
     """
     Traffic-light signal for AR Days (DSO).
 
@@ -189,7 +188,7 @@ def ar_days_signal(value: Optional[float]) -> str:
     return "red"
 
 
-def ap_days_signal(value: Optional[float]) -> str:
+def ap_days_signal(value: float | None) -> str:
     """
     Traffic-light signal for AP Days (DPO).
 
@@ -219,7 +218,7 @@ def ap_days_signal(value: Optional[float]) -> str:
     return "red"
 
 
-def current_ratio_signal(value: Optional[float]) -> str:
+def current_ratio_signal(value: float | None) -> str:
     """
     Traffic-light signal for Current Ratio.
 

@@ -4,7 +4,7 @@ Light theme · traffic light KPI signals · annotated charts
 """
 
 from __future__ import annotations
-from typing import Any
+
 import plotly.graph_objects as go
 import streamlit as st
 

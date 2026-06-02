@@ -10,8 +10,10 @@ All errors flow through error_logger → error_report.csv (Task 5).
 Architecture slot: loader → [VALIDATOR] → cleaner → transformer → canonical
 """
 
-import pandas as pd
 import logging
+
+import pandas as pd
+
 from src.utils.error_logger import log_error
 
 logger = logging.getLogger(__name__)

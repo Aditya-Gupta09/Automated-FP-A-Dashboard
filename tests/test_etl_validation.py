@@ -23,9 +23,10 @@ ETL bugs are silent killers. These tests ensure the pipeline fails loudly.
 import os
 import sys
 import tempfile
+
 import numpy as np
-import pytest
 import pandas as pd
+import pytest
 
 # ── add project src to path ───────────────────────────────────────────────────
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -34,30 +35,29 @@ sys.path.insert(0, os.path.join(PROJECT_ROOT, "src"))
 # ── stub error_logger if not present (imported by validator + cleaner) ────────
 try:
     from src.utils.error_logger import (
+        error_summary,
+        get_errors,
         log_error,
         reset_errors,
         save_error_report,
-        get_errors,
-        error_summary,
     )
 
     HAS_ERROR_LOGGER = True
 except ImportError:
     HAS_ERROR_LOGGER = False
 
+from src.etl.cleaner import MISSING_VALUE_POLICY, handle_missing
 from src.etl.validator import (
+    BS_TOLERANCE,
+    CF_TOLERANCE,
+    REQUIRED_BS_COLS,
+    REQUIRED_IS_COLS,
     check_duplicates,
-    validate_schema,
     validate_bs_balance,
     validate_cf_reconciliation,
     validate_dtypes,
-    REQUIRED_IS_COLS,
-    REQUIRED_BS_COLS,
-    REQUIRED_CF_COLS,
-    BS_TOLERANCE,
-    CF_TOLERANCE,
+    validate_schema,
 )
-from src.etl.cleaner import handle_missing, MISSING_VALUE_POLICY
 
 # ══════════════════════════════════════════════════════════════════════════════
 # 1. COLUMN / SCHEMA VALIDATION

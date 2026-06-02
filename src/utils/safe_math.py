@@ -1,14 +1,13 @@
 # src/utils/safe_math.py
 """Safe math operations for financial models."""
 
-from typing import Optional
 
 
 def safe_divide(
-    numerator: Optional[float],
-    denominator: Optional[float],
-    default: Optional[float] = None,
-) -> Optional[float]:
+    numerator: float | None,
+    denominator: float | None,
+    default: float | None = None,
+) -> float | None:
     """
     Safe division that never raises ZeroDivisionError or returns NaN.
 
@@ -25,16 +24,16 @@ def safe_divide(
 
 
 def safe_percent(
-    numerator: Optional[float], denominator: Optional[float]
-) -> Optional[float]:
+    numerator: float | None, denominator: float | None
+) -> float | None:
     """Safe division for percentages (returns 0–1 scale, not 0–100)."""
     result = safe_divide(numerator, denominator, default=None)
     return result if result is None else min(1.0, max(0.0, result))
 
 
 def clip_to_bounds(
-    value: Optional[float], min_val: float = 0.0, max_val: float = 1.0
-) -> Optional[float]:
+    value: float | None, min_val: float = 0.0, max_val: float = 1.0
+) -> float | None:
     """Clip value to [min_val, max_val] range. Returns None if input is None."""
     if value is None:
         return None

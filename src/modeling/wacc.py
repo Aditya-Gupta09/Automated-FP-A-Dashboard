@@ -31,9 +31,9 @@ Usage:
     result = run_wacc_pipeline(model_path, assumptions)
 """
 
-import os
-import json
 import argparse
+import json
+import os
 from datetime import datetime
 
 try:
@@ -385,7 +385,7 @@ def _print_wacc_workings(computed: dict, check: dict, cfg: dict):
     wacc = computed["wacc_computed"]
 
     print(f"\n{'─'*60}")
-    print(f"  WACC CALCULATION")
+    print("  WACC CALCULATION")
     print(f"{'─'*60}")
     print(f"  Ke  = {rf:.4%} + {beta:.4f} × {erp:.4%} = {ke:.4%}")
     print(
