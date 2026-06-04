@@ -55,7 +55,7 @@ The Streamlit app provides 5 interactive tabs with live scenario switching:
 
 ### Tab 1: Valuation Snapshot
 
-![Valuation Tab](assets/dashboard/dashboard-overview.png)
+![Valuation Tab](assets/screenshots/dashboard-overview.png)
 
 **Features:**
 - Three scenario comparison (Base $109.16 / Upside $229.53 / Downside $32.76)
@@ -67,7 +67,7 @@ The Streamlit app provides 5 interactive tabs with live scenario switching:
 
 ### Tab 2: Revenue & Segments
 
-![Revenue Tab](assets/dashboard/revenue-segments.png)
+![Revenue Tab](assets/screenshots/revenue-segments.png)
 
 **Features:**
 - Revenue by segment (FY2025 actual): Data Center 88.3% ($115.2B), Gaming 8.7% ($11.4B), ProViz 1.4%, Auto 1.3%, OEM 0.3%
@@ -79,7 +79,7 @@ The Streamlit app provides 5 interactive tabs with live scenario switching:
 
 ### Tab 3: 3-Statement Model
 
-![3-Statement Tab](assets/dashboard/three-statement.png)
+![3-Statement Tab](assets/screenshots/three-statement.png)
 
 **Features:**
 - Revenue projection (FY2020–2025 actual, FY2026–30 forecast)
@@ -92,7 +92,7 @@ The Streamlit app provides 5 interactive tabs with live scenario switching:
 
 ### Tab 4: KPIs & Ratios
 
-![KPI Tab](assets/dashboard/kpi-ratios.png)
+![KPI Tab](assets/screenshots/kpi-ratios.png)
 
 **Features:**
 - Traffic-light signals for 8 KPIs (Gross margin, EBITDA margin, FCF margin, Revenue growth, DSO, DPO, Current ratio, Interest coverage)
@@ -104,7 +104,7 @@ The Streamlit app provides 5 interactive tabs with live scenario switching:
 
 ### Tab 5: DCF Sensitivity Matrix
 
-![DCF Sensitivity Tab](assets/dashboard/dcf-sensitivity.png)
+![DCF Sensitivity](assets/screenshots/dcf-sensitivity.png)
 
 **Features:**
 - 9×9 sensitivity grid: WACC (10.9%–14.9%) × Terminal Growth (2.0%–6.0%)
